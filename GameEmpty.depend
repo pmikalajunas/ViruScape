@@ -1,0 +1,413 @@
+# depslib dependency file v1.0
+1591201610 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\main.cpp
+	"SDL/SDL.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326110987 c:\sdl-1.2.15\include\sdl\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_platform.h
+
+1326110994 c:\sdl-1.2.15\include\sdl\sdl_config_win32.h
+	"SDL_platform.h"
+
+1326111000 c:\sdl-1.2.15\include\sdl\begin_code.h
+
+1325738639 c:\sdl-1.2.15\include\sdl\close_code.h
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_keysym.h
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 c:\sdl-1.2.15\include\sdl\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1331654274 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\baseengine.cpp
+	"header.h"
+	<SDL_syswm.h>
+	<math.h>
+	"BaseEngine.h"
+	"DisplayableObject.h"
+	"templates.h"
+
+1393361880 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\header.h
+	<stdlib.h>
+	<crtdbg.h>
+	"SDL.h"
+	"SDL_ttf.h"
+	"SDL_image.h"
+	"SDL/SDL.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_image.h"
+
+1331654220 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\baseengine.h
+	"FontManager.h"
+	<assert.h>
+
+1393360922 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\fontmanager.h
+
+1298484046 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\displayableobject.h
+	"BaseEngine.h"
+
+1298565662 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\templates.h
+
+1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\bouncingball.cpp
+	"header.h"
+	"BouncingBall.h"
+	"BouncingBallMain.h"
+
+1298698496 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\bouncingball.h
+	"DisplayableObject.h"
+	"MovementPosition.h"
+	"BouncingBallMain.h"
+
+1297264094 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\movementposition.h
+	"templates.h"
+
+1298925770 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\bouncingballmain.h
+	"BaseEngine.h"
+	"TileManager.h"
+
+1331594830 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tilemanager.h
+	"BaseEngine.h"
+
+1331594574 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\bouncingballmain.cpp
+	"header.h"
+	"BaseEngine.h"
+	"BouncingBall.h"
+	"BouncingBallMain.h"
+	"JPGImage.h"
+	"TileManager.h"
+
+1300892640 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\jpgimage.h
+
+1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2amain.cpp
+	"header.h"
+	"Demo2aMain.h"
+
+1299609034 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2amain.h
+	"baseengine.h"
+
+1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2main.cpp
+	"header.h"
+	"BaseEngine.h"
+	"Demo2Object.h"
+	"Demo2Main.h"
+	"JPGImage.h"
+	"TileManager.h"
+
+1299565572 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2object.h
+	"displayableobject.h"
+
+1299609062 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2main.h
+	"BaseEngine.h"
+	"TileManager.h"
+	"Demo2TileManager.h"
+
+1299594656 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2tilemanager.h
+	"tilemanager.h"
+
+1331595028 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2object.cpp
+	"header.h"
+	"Demo2Object.h"
+	"Demo2Main.h"
+
+1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2tilemanager.cpp
+	"header.h"
+	"Demo2TileManager.h"
+
+1300217206 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3main.cpp
+	"header.h"
+	"BaseEngine.h"
+	"Demo3Object.h"
+	"Demo3ObjectFinished.h"
+	"Demo3Main.h"
+	"JPGImage.h"
+	"TileManager.h"
+
+1300207000 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3object.h
+	"displayableobject.h"
+	"MovementPosition.h"
+
+1300216960 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3objectfinished.h
+	"DisplayableObject.h"
+	"MovementPosition.h"
+
+1300212468 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3main.h
+	"BaseEngine.h"
+	"TileManager.h"
+	"Demo3TileManager.h"
+
+1300159646 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3tilemanager.h
+	"tilemanager.h"
+
+1331594910 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3object.cpp
+	"header.h"
+	"Demo3Object.h"
+	"Demo3Main.h"
+
+1300217306 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3objectfinished.cpp
+	"header.h"
+	"Demo3ObjectFinished.h"
+	"Demo3Main.h"
+
+1300213516 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo3tilemanager.cpp
+	"header.h"
+	"Demo3TileManager.h"
+
+1591253729 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4main.cpp
+	"header.h"
+	"BaseEngine.h"
+	"Demo4Object.h"
+	"Demo4Main.h"
+	"JPGImage.h"
+	"TileManager.h"
+
+1300768440 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4object.h
+	"displayableobject.h"
+	"MovementPosition.h"
+
+1300804560 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4main.h
+	"BaseEngine.h"
+	"TileManager.h"
+	"Demo4TileManager.h"
+
+1300768440 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4tilemanager.h
+	"tilemanager.h"
+
+1300812240 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4object.cpp
+	"header.h"
+	"Demo4Object.h"
+	"Demo4Main.h"
+
+1591245577 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4tilemanager.cpp
+	"header.h"
+	"Demo4TileManager.h"
+
+1364244500 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demoamain.cpp
+	"header.h"
+	"templates.h"
+	"DemoAMain.h"
+	"DemoBObject.h"
+
+1364244504 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demoamain.h
+	"BaseEngine.h"
+
+1364241506 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demobobject.h
+	"DisplayableObject.h"
+
+1364242588 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demobobject.cpp
+	"header.h"
+	"templates.h"
+	"DemoBObject.h"
+
+1331653822 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\displayableobject.cpp
+	"header.h"
+	"BaseEngine.h"
+	"DisplayableObject.h"
+
+1331653704 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\fontmanager.cpp
+	"header.h"
+	"FontManager.h"
+	"templates.h"
+
+1331662826 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\jpgimage.cpp
+	"header.h"
+	"SDL/SDL_image.h"
+	"JPGImage.h"
+
+1591763805 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\mainfunction.cpp
+	"header.h"
+	"templates.h"
+	"MyProjectMain.h"
+
+1591764873 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+	"header.h"
+	"BaseEngine.h"
+	"MyProjectMain.h"
+	"JPGImage.h"
+	"TileManager.h"
+	"DisplayableObject.h"
+	"Tile.h"
+
+1328396962 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
+	"BaseEngine.h"
+
+1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tilemanager.cpp
+	"header.h"
+	"BaseEngine.h"
+	"TileManager.h"
+
+1591764968 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+	<DisplayableObject.h>
+

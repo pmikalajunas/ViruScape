@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="GameEmpty" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/GameEmpty" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/GameEmpty" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="bin/Debug/SDL.dll" />
+		<Unit filename="bin/Debug/SDL_image.dll" />
+		<Unit filename="bin/Debug/SDL_ttf.dll" />
+		<Unit filename="bin/Debug/libfreetype-6.dll" />
+		<Unit filename="bin/Debug/libjpeg-8.dll" />
+		<Unit filename="bin/Debug/libpng15-15.dll" />
+		<Unit filename="bin/Debug/libtiff-5.dll" />
+		<Unit filename="bin/Debug/libwebp-2.dll" />
+		<Unit filename="bin/Debug/zlib1.dll" />
+		<Unit filename="bin/SDL.dll" />
+		<Unit filename="bin/SDL_image.dll" />
+		<Unit filename="bin/SDL_ttf.dll" />
+		<Unit filename="bin/libfreetype-6.dll" />
+		<Unit filename="bin/libjpeg-8.dll" />
+		<Unit filename="bin/libpng15-15.dll" />
+		<Unit filename="bin/libtiff-5.dll" />
+		<Unit filename="bin/libwebp-2.dll" />
+		<Unit filename="bin/zlib1.dll" />
+		<Unit filename="src/BaseEngine.cpp" />
+		<Unit filename="src/BaseEngine.h" />
+		<Unit filename="src/BouncingBall.cpp" />
+		<Unit filename="src/BouncingBall.h" />
+		<Unit filename="src/BouncingBallMain.cpp" />
+		<Unit filename="src/BouncingBallMain.h" />
+		<Unit filename="src/Cornerstone Regular.ttf" />
+		<Unit filename="src/Demo2Main.cpp" />
+		<Unit filename="src/Demo2Main.h" />
+		<Unit filename="src/Demo2Object.cpp" />
+		<Unit filename="src/Demo2Object.h" />
+		<Unit filename="src/Demo2TileManager.cpp" />
+		<Unit filename="src/Demo2TileManager.h" />
+		<Unit filename="src/Demo2aMain.cpp" />
+		<Unit filename="src/Demo2aMain.h" />
+		<Unit filename="src/Demo3Main.cpp" />
+		<Unit filename="src/Demo3Main.h" />
+		<Unit filename="src/Demo3Object.cpp" />
+		<Unit filename="src/Demo3Object.h" />
+		<Unit filename="src/Demo3ObjectFinished.cpp" />
+		<Unit filename="src/Demo3ObjectFinished.h" />
+		<Unit filename="src/Demo3TileManager.cpp" />
+		<Unit filename="src/Demo3TileManager.h" />
+		<Unit filename="src/Demo4Main.cpp" />
+		<Unit filename="src/Demo4Main.h" />
+		<Unit filename="src/Demo4Object.cpp" />
+		<Unit filename="src/Demo4Object.h" />
+		<Unit filename="src/Demo4TileManager.cpp" />
+		<Unit filename="src/Demo4TileManager.h" />
+		<Unit filename="src/DemoAMain.cpp" />
+		<Unit filename="src/DemoAMain.h" />
+		<Unit filename="src/DemoBObject.cpp" />
+		<Unit filename="src/DemoBObject.h" />
+		<Unit filename="src/DisplayableArc.h" />
+		<Unit filename="src/DisplayableObject.cpp" />
+		<Unit filename="src/DisplayableObject.h" />
+		<Unit filename="src/FontManager.cpp" />
+		<Unit filename="src/FontManager.h" />
+		<Unit filename="src/JPGImage.cpp" />
+		<Unit filename="src/JPGImage.h" />
+		<Unit filename="src/MovementPosition.h" />
+		<Unit filename="src/MyProjectMain.cpp" />
+		<Unit filename="src/MyProjectMain.h" />
+		<Unit filename="src/TileManager.cpp" />
+		<Unit filename="src/TileManager.h" />
+		<Unit filename="src/demo.jpg" />
+		<Unit filename="src/demo.png" />
+		<Unit filename="src/header.h" />
+		<Unit filename="src/mainfunction.cpp" />
+		<Unit filename="src/screenshot.PNG" />
+		<Unit filename="src/templates.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

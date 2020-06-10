@@ -386,12 +386,14 @@
 	"SDL/SDL_image.h"
 	"JPGImage.h"
 
-1591763805 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\mainfunction.cpp
+1591776342 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\mainfunction.cpp
+	<fstream>
+	<iostream>
 	"header.h"
 	"templates.h"
 	"MyProjectMain.h"
 
-1591764873 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1591792932 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -399,8 +401,9 @@
 	"TileManager.h"
 	"DisplayableObject.h"
 	"Tile.h"
+	"MyBall.h"
 
-1328396962 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
+1591773511 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
 	"BaseEngine.h"
 
 1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tilemanager.cpp
@@ -408,6 +411,19 @@
 	"BaseEngine.h"
 	"TileManager.h"
 
-1591764968 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+1591778197 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+	<DisplayableObject.h>
+
+1591793181 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+	"header.h"
+	"templates.h"
+	"Tile.h"
+
+1591792441 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.cpp
+	"header.h"
+	"templates.h"
+	"MyBall.h"
+
+1591792358 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.h
 	<DisplayableObject.h>
 

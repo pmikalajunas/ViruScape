@@ -1,3 +1,5 @@
+#include <fstream>
+#include <iostream>
 #include "header.h"
 
 #include "templates.h"
@@ -11,10 +13,6 @@
 //#include "DemoAMain.h"
 //#include "DemoBObject.h"
 //#include "Demo4Main.h"
-
-#define BASE_SCREEN_WIDTH 800
-#define BASE_SCREEN_HEIGHT 600
-
 
 
 int main(int argc, char *argv[])
@@ -30,6 +28,7 @@ int main(int argc, char *argv[])
 	int iResult;
 
 	{
+		freopen( "CON", "w", stdout );
 		// Needs just one of the two following lines:
 		///BouncingBallMain oMain;
 		MyProjectMain oMain;

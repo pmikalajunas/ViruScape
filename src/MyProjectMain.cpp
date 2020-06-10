@@ -12,6 +12,7 @@
 
 #include "DisplayableObject.h"
 #include "Tile.h"
+#include "MyBall.h"
 
 // This draws and moves the simple rectangle on the screen
 class SimpleShape : public DisplayableObject
@@ -125,20 +126,7 @@ Basically do the drawing of the background in here and it'll be copied to the sc
 */
 void MyProjectMain::SetupBackgroundBuffer()
 {
-	FillBackground( 0x000000 );
-
-
-	// for ( int iX = 0 ; iX < GetScreenWidth() ; iX++ )
-	// 	for ( int iY = 0 ; iY < this->GetScreenHeight() ; iY++ )
-	// 		switch( rand()%100 )
-	// 		{
-    //             case 0: SetBackgroundPixel( iX, iY, 0xFF0000 ); break;
-    //             case 1: SetBackgroundPixel( iX, iY, 0x00FF00 ); break;
-    //             case 2: SetBackgroundPixel( iX, iY, 0x0000FF ); break;
-    //             case 3: SetBackgroundPixel( iX, iY, 0xFFFF00 ); break;
-    //             case 4: SetBackgroundPixel( iX, iY, 0x00FFFF ); break;
-    //             case 5: SetBackgroundPixel( iX, iY, 0xFF00FF ); break;
-	// 		}
+	FillBackground( 0xffffff );
 
 }
 
@@ -156,21 +144,17 @@ int MyProjectMain::InitialiseObjects()
 	DestroyOldObjects();
 
 	// Create an array one element larger than the number of objects that you want.
-	m_ppDisplayableObjects = new DisplayableObject*[3];
+	m_ppDisplayableObjects = new DisplayableObject*[4];
 
 	// You MUST set the array entry after the last one that you create to NULL, so that the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
-	m_ppDisplayableObjects[0] = new SimpleShape(this);
-	m_ppDisplayableObjects[1] = new Tile(this);
-	m_ppDisplayableObjects[2] = NULL;
+	m_ppDisplayableObjects[0] = new Tile(this, 100, 100, 100);
+	m_ppDisplayableObjects[1] = new Tile(this, 500, 300, 100);
+	m_ppDisplayableObjects[2] = new MyBall(this);
+	m_ppDisplayableObjects[3] = NULL;
 
 	return 0;
 }
-
-
-
-
-
 
 
 

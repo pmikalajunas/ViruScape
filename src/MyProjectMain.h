@@ -3,6 +3,9 @@
 
 #include "BaseEngine.h"
 
+#define BASE_SCREEN_WIDTH 800
+#define BASE_SCREEN_HEIGHT 600
+
 class MyProjectMain : public BaseEngine
 {
 public:

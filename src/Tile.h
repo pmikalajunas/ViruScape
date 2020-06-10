@@ -6,14 +6,23 @@
 
 class Tile : public DisplayableObject
 {
+     private:
+        double m_dSX;
+        double m_dSY;
+        double m_dX;
+        double m_dY;
+
     public:
-        Tile(BaseEngine* pEngine);
+        Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX);
         virtual ~Tile();
         void Draw(void);
+        void DoUpdate(int currentTime);
+
 
     protected:
 
-    private:
+
+
 };
 
 #endif // TILE_H

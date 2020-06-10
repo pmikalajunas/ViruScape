@@ -21,7 +21,7 @@ Tile::Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX) : Display
     m_iDrawHeight = 30;
 
     // Speed
-    m_dSX = 1;
+    m_dSX = 0.2;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;

@@ -1,12 +1,14 @@
+#include <cmath>
 #include "header.h"
 #include "templates.h"
 #include "MyBall.h"
 
-MyBall::MyBall(BaseEngine* pEngine, int size) : DisplayableObject(pEngine)
+MyBall::MyBall(BaseEngine* pEngine, int size) : DisplayableObject(pEngine),
+m_pMainEngine( pEngine ), height(size)
 {
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = 380;
-    m_iCurrentScreenY = m_iPreviousScreenY = 400;
+    m_iCurrentScreenY = m_iPreviousScreenY = 300;
 
     // Set ball coordinate to the centre of the ball.
     m_iStartDrawPosX = -size/2;
@@ -17,11 +19,12 @@ MyBall::MyBall(BaseEngine* pEngine, int size) : DisplayableObject(pEngine)
     m_iDrawHeight = size;
 
     // Speed
-    m_dSY = 0.1;
+    m_dSY = 0.4;
 
-    gravity = 0.001;
+    gravity = 0.0009;
     friction = 0.98;
-    bounce = 1;
+    bounce = 0.9;
+    tileBounce = 1.1;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -64,14 +67,83 @@ void MyBall::Draw(void)
 void MyBall::DoUpdate(int currentTime) 
 {
 
-	if ( GetEngine()->IsKeyPressed( SDLK_UP ) )
-		m_dSY -= 0.01;
-	if ( GetEngine()->IsKeyPressed( SDLK_DOWN ) )
-		m_dSY += 0.01;
+    DisplayableObject* pObject;
+    for (int iObjectId = 0; (pObject = m_pMainEngine->GetDisplayableObject(iObjectId)) != NULL; iObjectId++)
+    {
+
+        if ( pObject == this ) // This is us, skip it
+            continue;
+
+
+        int testX = m_dX;
+        int testY = m_dY;
+        // Get obstacle's X and Y.
+        int ox = pObject->getCurrentScreenX();
+        int oy = pObject->getCurrentScreenY();
+        // Get obstacle's width and height.
+        int ow = pObject->getDrawWidth();
+        int oh = pObject->getDrawHeight();
+
+        // Ball is to the left of the obstacble.
+        if (m_dX < ox) { 
+            testX = ox;
+            //printf("left\n"); 
+        }
+
+        // Ball is to the right of the obstacble.
+        else if (m_dX > ox + ow) {
+            testX = ox + ow;
+            //printf("right\n"); 
+        }
+
+        // Ball is above the obstacle.
+        if (m_dY < oy) {
+            testY = oy;
+            //printf("above\n"); 
+        }
+
+        // Ball is below the obstacle.
+        else if (m_dY > oy + oh) {
+            testY = oy + oh;
+            //printf("below\n"); 
+        }
+
+        double distX = m_dX - testX;
+        double distY = m_dY - testY;
+        double distance = sqrt( (distX*distX) + (distY*distY) );
+        int radius = height / 2;
+
+        //printf("Distance to obstacle: %.2f Radius: %d\n ", distance, radius);
+
+        if (distance <= radius) {
+            if (distY < 0) {
+                m_dSY *= -tileBounce;
+            }
+            m_dSY += distY / 100;
+            m_dSX += distX / 100;
+            printf("Collision distX: %.2f distY: %.2f\n", distX, distY);
+
+        }
+
+
+    }
+
+
+    //printf("Bottom Collision, distance to obsticle: %.2f\n", distance);
+
+
+	// if ( GetEngine()->IsKeyPressed( SDLK_UP ) )
+	// 	m_dSY -= 0.01;
+    //     //m_dY -= 0.2;
+	// if ( GetEngine()->IsKeyPressed( SDLK_DOWN ) )
+	//     m_dSY += 0.01;
+    //     //m_dY += 0.2;
 	if ( GetEngine()->IsKeyPressed( SDLK_LEFT ) )
-		m_dSX -= 0.01;
+		m_dSX -= 0.003;
+        //m_dX -= 0.2;
 	if ( GetEngine()->IsKeyPressed( SDLK_RIGHT ) )
-		m_dSX += 0.01;
+		m_dSX += 0.003;
+        //m_dX += 0.2;
 	if ( GetEngine()->IsKeyPressed( SDLK_SPACE ) )
 		m_dSX = m_dSY = 0;
 

@@ -216,7 +216,7 @@
 
 1393360922 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\fontmanager.h
 
-1298484046 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\displayableobject.h
+1591802546 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\displayableobject.h
 	"BaseEngine.h"
 
 1298565662 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\templates.h
@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1591796929 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1591806957 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -414,16 +414,17 @@
 1591778197 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
 	<DisplayableObject.h>
 
-1591793181 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1591806866 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
 
-1591797447 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.cpp
+1591806797 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.cpp
+	<cmath>
 	"header.h"
 	"templates.h"
 	"MyBall.h"
 
-1591796930 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.h
+1591807650 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.h
 	<DisplayableObject.h>
 

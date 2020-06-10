@@ -14,6 +14,7 @@ class MyBall : public DisplayableObject
     protected:
 
      private:
+        BaseEngine* m_pMainEngine;
         double m_dSX;
         double m_dSY;
         double m_dX;
@@ -21,6 +22,8 @@ class MyBall : public DisplayableObject
         double gravity;
         double friction;
         double bounce;
+        int height;
+        double tileBounce;
 };
 
 #endif // MYBALL_H

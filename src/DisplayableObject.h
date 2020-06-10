@@ -36,6 +36,14 @@ public:
 	/** Redraw the whole screen - background and objects */
 	void RedrawWholeScreen() { m_pEngine->Redraw(true); }
 
+	int getDrawHeight() { return m_iDrawHeight; }
+
+	int getDrawWidth() { return m_iDrawWidth; }
+
+	int getCurrentScreenX() { return m_iCurrentScreenX; }
+
+	int getCurrentScreenY() { return m_iCurrentScreenY; }
+
 	/** Get the X centre position of the object */
 	int GetXCentre() { return m_iCurrentScreenX + m_iStartDrawPosX + m_iDrawWidth/2; }
 

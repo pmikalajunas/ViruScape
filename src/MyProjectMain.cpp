@@ -148,8 +148,8 @@ int MyProjectMain::InitialiseObjects()
 
 	// You MUST set the array entry after the last one that you create to NULL, so that the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
-	m_ppDisplayableObjects[0] = new Tile(this, 100, 100, 100);
-	m_ppDisplayableObjects[1] = new Tile(this, 500, 300, 100);
+	m_ppDisplayableObjects[0] = new Tile(this, 100, 300, 100);
+	m_ppDisplayableObjects[1] = new Tile(this, 500, 500, 100);
 	m_ppDisplayableObjects[2] = new MyBall(this, 60);
 	m_ppDisplayableObjects[3] = NULL;
 

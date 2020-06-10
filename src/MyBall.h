@@ -7,7 +7,7 @@
 class MyBall : public DisplayableObject
 {
     public:
-        MyBall(BaseEngine* pEngine);
+        MyBall(BaseEngine* pEngine, int size);
         virtual ~MyBall();
         void Draw(void);
         void DoUpdate(int currentTime);
@@ -18,6 +18,9 @@ class MyBall : public DisplayableObject
         double m_dSY;
         double m_dX;
         double m_dY;
+        double gravity;
+        double friction;
+        double bounce;
 };
 
 #endif // MYBALL_H

@@ -21,12 +21,11 @@ using namespace std;
 MyProjectMain::MyProjectMain(void) : BaseEngine( 50 ), 
 m_state(stateInit), score(0)
 {
+
+	reader = new FileReader();
+	reader->readScores("scores.txt");
+
 	intialiseFonts();
-
-	scores["jimmy"] = 20;
-	scores["john"] = 10;
-	scores["james"] = 30;
-
 
 }
 
@@ -108,6 +107,7 @@ void MyProjectMain::DrawStrings()
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			DrawScreenString( 169, 280, "Scores", 0x0, smallFont );
 
+			unordered_map<string, int> scores = reader->getScores();
 			int y = 300;
 			for (auto& x : scores){
 				char buf[64];

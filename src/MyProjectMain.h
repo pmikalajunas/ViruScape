@@ -2,6 +2,7 @@
 #define MYPROJECTMAIN_H
 
 #include "BaseEngine.h"
+#include "FileReader.h"
 #include <unordered_map>
 
 using namespace std;
@@ -45,6 +46,9 @@ public:
 	enum State { stateInit, stateMain, statePaused, endGame };
 
 private:
+
+	FileReader* reader;
+
 	State m_state;
 	int score;
 
@@ -52,8 +56,6 @@ private:
 	Font* mediumFont;
 	Font* largeFont;
 
-	// Stores all the scores.
-	unordered_map<string, int> scores;
 
 };
 

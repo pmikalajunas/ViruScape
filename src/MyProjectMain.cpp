@@ -144,14 +144,16 @@ int MyProjectMain::InitialiseObjects()
 	DestroyOldObjects();
 
 	// Create an array one element larger than the number of objects that you want.
-	m_ppDisplayableObjects = new DisplayableObject*[4];
+	m_ppDisplayableObjects = new DisplayableObject*[6];
 
 	// You MUST set the array entry after the last one that you create to NULL, so that the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
-	m_ppDisplayableObjects[0] = new Tile(this, 100, 300, 100);
-	m_ppDisplayableObjects[1] = new Tile(this, 500, 500, 100);
-	m_ppDisplayableObjects[2] = new MyBall(this, 60);
-	m_ppDisplayableObjects[3] = NULL;
+	m_ppDisplayableObjects[0] = new MyBall(this, 60);
+	m_ppDisplayableObjects[1] = new Tile(this, 100, 300, 150);
+	m_ppDisplayableObjects[2] = new Tile(this, 500, 500, 150);
+	m_ppDisplayableObjects[3] = new Tile(this, 100, 600, 150);
+	m_ppDisplayableObjects[4] = new Tile(this, 500, 200, 150);
+	m_ppDisplayableObjects[5] = NULL;
 
 	return 0;
 }
@@ -188,28 +190,30 @@ void MyProjectMain::GameAction()
 }
 
 
-// Override to handle a mouse press
-void MyProjectMain::MouseDown( int iButton, int iX, int iY )
-{
-    //SetupBackgroundBuffer();
-	//Redraw(true); // Force total redraw
-    fprintf (stderr,"Error %s", "heyy"); // the string can be formatted
-    printf( "%d %d\n", iX, iY );
-	// Redraw the background
-	if ( iButton == SDL_BUTTON_LEFT )
-    {
-        DrawBackgroundRectangle( iX-10, iY-10, iX+10, iY+10, 0xffff00 );
-        SetSDLUpdateRectImmediately( iX-10, iY-10, 21, 21 );
-        Redraw(true);
-    }
-    else if ( iButton == SDL_BUTTON_RIGHT )
-    {
-        DrawBackgroundOval( iX-10, iY-10, iX+10, iY+10, 0xff0000 );
-        //SetSDLUpdateRectImmediately( iX-10, iY-10, 21, 21 );
-        Redraw(true);
-    }
+void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 
-}\
+	m_iDrawableObjectsChanged = 0;
+	if ( m_ppDisplayableObjects != NULL )
+	{
+		for ( int i = 0 ; m_ppDisplayableObjects[i] != NULL ; i++ )
+		{
+			m_ppDisplayableObjects[i]->DoUpdate(iCurrentTime);
+			MyBall* myBall = dynamic_cast<MyBall*>(m_ppDisplayableObjects[0]);
+			// If it's a tile object
+			if (i != 0 && myBall->getTileCollision()) {
+				Tile* tile = dynamic_cast<Tile*>(m_ppDisplayableObjects[i]);
+				tile->setTileYSpeed(0.2);
+			}
+			if ( m_iDrawableObjectsChanged )
+				return; // Abort! Something changed in the array
+		}
+		MyBall* myBall = dynamic_cast<MyBall*>(m_ppDisplayableObjects[0]);
+		myBall->setTileCollision(false);
+
+	}
+
+}
+
 
 /*
 Handle any key presses here.
@@ -225,13 +229,6 @@ void MyProjectMain::KeyDown(int iKeyCode)
 
         case SDLK_SPACE: // SPACE Pauses
             break;
-
-        case 'z':
-            SetupBackgroundBuffer();
-            Redraw(true);
-            break;
-		case 'x':
-			DrawStrings();
 	}
 
 }

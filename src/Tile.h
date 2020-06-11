@@ -17,6 +17,7 @@ class Tile : public DisplayableObject
         virtual ~Tile();
         void Draw(void);
         void DoUpdate(int currentTime);
+        void setTileYSpeed(double ySpeed);
 
 
     protected:

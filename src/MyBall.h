@@ -11,10 +11,15 @@ class MyBall : public DisplayableObject
         virtual ~MyBall();
         void Draw(void);
         void DoUpdate(int currentTime);
+        double GetYSpeed(void);
+        bool getTileCollision(void);
+        void setTileCollision(bool tileCollision);
+
+
     protected:
 
      private:
-        BaseEngine* m_pMainEngine;
+        BaseEngine * m_pMainEngine;
         double m_dSX;
         double m_dSY;
         double m_dX;
@@ -24,6 +29,7 @@ class MyBall : public DisplayableObject
         double bounce;
         int height;
         double tileBounce;
+        bool touchedTile;
 };
 
 #endif // MYBALL_H

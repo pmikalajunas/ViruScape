@@ -21,7 +21,7 @@ Tile::Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX) : Display
     m_iDrawHeight = 30;
 
     // Speed
-    m_dSX = 0.2;
+    m_dSX = 0;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -56,13 +56,14 @@ void Tile::Draw(void)
 void Tile::DoUpdate( int iCurrentTime )
 {
 
+
     // Alter position for speed
     m_dX += m_dSX;
     m_dY += m_dSY;
 
     //printf("Tile's initial m_dX: (%.2f), m_dY: (%.2f)\n", m_dX, m_dY );
 
-    // Check for bounce off the edge
+    // Left boundary
     if ( (m_dX+m_iStartDrawPosX) < 0 )
     {
         //printf("Case 1\n");
@@ -70,6 +71,7 @@ void Tile::DoUpdate( int iCurrentTime )
         if ( m_dSX < 0 )
             m_dSX = -m_dSX;
     }
+    // Right boundary.
     if ((m_dX + m_iStartDrawPosX + m_iDrawWidth) > (GetEngine()->GetScreenWidth()-1) )
     {
         //printf("Case 2\n");
@@ -77,6 +79,7 @@ void Tile::DoUpdate( int iCurrentTime )
         if ( m_dSX > 0 )
             m_dSX = -m_dSX;
     }
+    // Top
     if ( (m_dY+m_iStartDrawPosY) < 0 )
     {
         //printf("Case 3\n");
@@ -84,20 +87,25 @@ void Tile::DoUpdate( int iCurrentTime )
         if ( m_dSY < 0 )
             m_dSY = -m_dSY;
     }
+
+    // Bottom
     if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
     {
         //printf("Case 4\n");
-        m_dY = GetEngine()->GetScreenHeight() -1 - m_iStartDrawPosY - m_iDrawHeight;
-        if ( m_dSY > 0 )
-            m_dSY = -m_dSY;
+        m_dY = -20;
+
     }
 
     // Set current position - you NEED to set the current positions
     m_iCurrentScreenX = (int)(m_dX+0.5);
     m_iCurrentScreenY = (int)(m_dY+0.5);
 
-    //printf("Tile's m_dX: (%.2f), m_dY: (%.2f)\n", m_dX, m_dY );
-
     // Ensure that the object gets redrawn on the display, if something changed
     RedrawObjects();
+}
+
+
+void Tile::setTileYSpeed(double ySpeed) {
+    m_dSY = ySpeed;
+    printf("setTileYSpeeed, m_dSY: %.2f\n", m_dSY);
 }

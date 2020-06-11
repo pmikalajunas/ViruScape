@@ -4,27 +4,27 @@
 #include "MyBall.h"
 
 MyBall::MyBall(BaseEngine* pEngine, int size) : DisplayableObject(pEngine),
-m_pMainEngine( pEngine ), height(size)
+m_pMainEngine( pEngine ), height(size), touchedTile(false)
 {
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = 380;
     m_iCurrentScreenY = m_iPreviousScreenY = 300;
 
     // Set ball coordinate to the centre of the ball.
-    m_iStartDrawPosX = -size/2;
-    m_iStartDrawPosY = -size/2;
+    m_iStartDrawPosX = - size / 2;
+    m_iStartDrawPosY = - size / 2;
 
-    // Record the ball size as both height and width
+    // Record the ball size as both height and width.
     m_iDrawWidth = size;
     m_iDrawHeight = size;
 
-    // Speed
-    m_dSY = 0.4;
+    // Speed.
+    m_dSY = 0.2;
 
-    gravity = 0.0009;
+    gravity = 0.0019;
     friction = 0.98;
-    bounce = 0.9;
-    tileBounce = 1.1;
+    bounce = 1;
+    tileBounce = 1.2;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -64,7 +64,11 @@ void MyBall::Draw(void)
     StoreLastScreenPositionAndUpdateRect();
 }
 
-void MyBall::DoUpdate(int currentTime) 
+double MyBall::GetYSpeed() {
+    return m_dSY;
+}
+
+void MyBall::DoUpdate(int currentTime)
 {
 
     DisplayableObject* pObject;
@@ -85,27 +89,27 @@ void MyBall::DoUpdate(int currentTime)
         int oh = pObject->getDrawHeight();
 
         // Ball is to the left of the obstacble.
-        if (m_dX < ox) { 
+        if (m_dX < ox) {
             testX = ox;
-            //printf("left\n"); 
+            //printf("left\n");
         }
 
         // Ball is to the right of the obstacble.
         else if (m_dX > ox + ow) {
             testX = ox + ow;
-            //printf("right\n"); 
+            //printf("right\n");
         }
 
         // Ball is above the obstacle.
         if (m_dY < oy) {
             testY = oy;
-            //printf("above\n"); 
+            //printf("above\n");
         }
 
         // Ball is below the obstacle.
         else if (m_dY > oy + oh) {
             testY = oy + oh;
-            //printf("below\n"); 
+            //printf("below\n");
         }
 
         double distX = m_dX - testX;
@@ -113,37 +117,37 @@ void MyBall::DoUpdate(int currentTime)
         double distance = sqrt( (distX*distX) + (distY*distY) );
         int radius = height / 2;
 
-        //printf("Distance to obstacle: %.2f Radius: %d\n ", distance, radius);
-
         if (distance <= radius) {
-            if (distY < 0) {
+            if (distY > -radius && distY < (-radius + 1)) {
+                touchedTile = true;
                 m_dSY *= -tileBounce;
+                printf("Collision distX: %.2f distY: %.2f\n", distX, distY);
             }
-            m_dSY += distY / 100;
-            m_dSX += distX / 100;
-            printf("Collision distX: %.2f distY: %.2f\n", distX, distY);
-
         }
-
-
     }
 
 
-    //printf("Bottom Collision, distance to obsticle: %.2f\n", distance);
+    if(m_dSY > 1){
+        m_dSY = 1;
+    }
+
+    if(m_dSX > 0.6){
+        m_dSX = 0.6;
+    }
 
 
-	// if ( GetEngine()->IsKeyPressed( SDLK_UP ) )
-	// 	m_dSY -= 0.01;
-    //     //m_dY -= 0.2;
-	// if ( GetEngine()->IsKeyPressed( SDLK_DOWN ) )
-	//     m_dSY += 0.01;
-    //     //m_dY += 0.2;
+	if ( GetEngine()->IsKeyPressed( SDLK_UP ) )
+		//m_dSY -= 0.01;
+        m_dY -= 0.2;
+	if ( GetEngine()->IsKeyPressed( SDLK_DOWN ) )
+	    //m_dSY += 0.01;
+        m_dY += 0.2;
 	if ( GetEngine()->IsKeyPressed( SDLK_LEFT ) )
-		m_dSX -= 0.003;
-        //m_dX -= 0.2;
+		//m_dSX -= 0.003;
+        m_dX -= 0.4;
 	if ( GetEngine()->IsKeyPressed( SDLK_RIGHT ) )
-		m_dSX += 0.003;
-        //m_dX += 0.2;
+		//m_dSX += 0.003;
+        m_dX += 0.4;
 	if ( GetEngine()->IsKeyPressed( SDLK_SPACE ) )
 		m_dSX = m_dSY = 0;
 
@@ -168,7 +172,7 @@ void MyBall::DoUpdate(int currentTime)
 			m_dSX *= -bounce;
 	}
 
-    // Ball went over top bound.   
+    // Ball went over top bound.
 	if ( (m_dY+m_iStartDrawPosY) < 0 )
 	{
         printf("Ball - top bound.\n");
@@ -202,4 +206,13 @@ void MyBall::DoUpdate(int currentTime)
 	// Ensure that the object gets redrawn on the display, if something changed
 	RedrawObjects();
 
+}
+
+
+bool MyBall::getTileCollision(){
+    return touchedTile;
+}
+
+void MyBall::setTileCollision(bool tileCollision) {
+    touchedTile = tileCollision;
 }

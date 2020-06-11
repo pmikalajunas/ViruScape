@@ -33,8 +33,7 @@ public:
 	*/
 	virtual void GameAction();
 
-	// Handle pressing of a mouse button
-	void MouseDown( int iButton, int iX, int iY );
+	virtual void UpdateAllObjects( int iCurrentTime );
 
 	// Handle pressing of a key
 	virtual void KeyDown(int iKeyCode);

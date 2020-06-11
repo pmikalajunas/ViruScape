@@ -82,13 +82,6 @@ void BouncingBall::Draw()
 				GetEngine()->SafeSetScreenPixel( iX, iY, uiColourMult * uiColour );
 			}
 
-	// If there is a label then draw the text
-	if ( (m_szLabel!=NULL) && (strlen(m_szLabel)>0) )
-	{
-		//GetEngine()->DrawString( iCentreX+m_iXLabelOffset+1, iCentreY+m_iYLabelOffset+1, m_szLabel, 0xffffff );
-		GetEngine()->DrawScreenString( iCentreX+m_iXLabelOffset, iCentreY+m_iYLabelOffset, m_szLabel, uiColourText );
-	}
-
 	// Store the position at which the object was last drawn
 	// You MUST do this to ensure that the screen is updated when only drawing movable objects
 	// This tells the system where to 'undraw' the object from

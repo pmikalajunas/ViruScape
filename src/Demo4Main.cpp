@@ -170,38 +170,38 @@ void Demo4Main::KeyDown(int iKeyCode)
 	// NEW SWITCH
 	switch ( iKeyCode )
 	{
-	case SDLK_ESCAPE: // End program when escape is pressed
-		SetExitWithCode( 0 );
-		break;
-	case SDLK_SPACE: // SPACE Pauses
-		switch( m_state )
-		{
-		case stateInit:
-			// Go to state main
-			m_state = stateMain;
-			// Force redraw of background
-			SetupBackgroundBuffer();
-			// Redraw the whole screen now
-			Redraw(true);
+		case SDLK_ESCAPE: // End program when escape is pressed
+			SetExitWithCode( 0 );
 			break;
-		case stateMain:
-			// Go to state paused
-			m_state = statePaused;
-			// Force redraw of background
-			SetupBackgroundBuffer();
-			// Redraw the whole screen now
-			Redraw(true);
-			break;
-		case statePaused:
-			// Go to state main
-			m_state = stateMain;
-			// Force redraw of background
-			SetupBackgroundBuffer();
-			// Redraw the whole screen now
-			Redraw(true);
-			break;
-		} // End switch on current state
-		break; // End of case SPACE
+		case SDLK_SPACE: // SPACE Pauses
+			switch( m_state )
+			{
+			case stateInit:
+				// Go to state main
+				m_state = stateMain;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
+			case stateMain:
+				// Go to state paused
+				m_state = statePaused;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
+			case statePaused:
+				// Go to state main
+				m_state = stateMain;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
+			} // End switch on current state
+			break; // End of case SPACE
 	}
 }
 

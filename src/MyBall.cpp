@@ -4,7 +4,7 @@
 #include "MyBall.h"
 
 MyBall::MyBall(BaseEngine* pEngine, int size) : DisplayableObject(pEngine),
-m_pMainEngine( pEngine ), height(size), touchedTile(false)
+m_pMainEngine( pEngine ), height(size), touchedTile(false), touchedGround(false)
 {
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = 380;
@@ -188,9 +188,7 @@ void MyBall::DoUpdate(int currentTime)
 	{
         printf("Ball - bottom bound.\n");
 		m_dY = GetEngine()->GetScreenHeight() -1 - m_iStartDrawPosY - m_iDrawHeight;
-		if ( m_dSY > 0 )
-			m_dSY *= -bounce;
-            m_dSX *= friction;
+		touchedGround = true;
 
 	}
 
@@ -215,4 +213,8 @@ bool MyBall::getTileCollision(){
 
 void MyBall::setTileCollision(bool tileCollision) {
     touchedTile = tileCollision;
+}
+
+bool MyBall::getTouchedGround(){
+    return touchedGround;
 }

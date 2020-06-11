@@ -3,19 +3,14 @@
 
 #include "BaseEngine.h"
 
-#define BASE_SCREEN_WIDTH 800
-#define BASE_SCREEN_HEIGHT 600
+
 
 class MyProjectMain : public BaseEngine
 {
 public:
 
-	/**
-	Constructor
-	*/
-	MyProjectMain()
-	: BaseEngine( 6 )
-	{}
+	MyProjectMain(void);
+	~MyProjectMain(void);
 
 	// Do any setup of back buffer prior to locking the screen buffer
 	// Basically do the drawing of the background in here and it'll be copied to the screen for you as needed
@@ -23,6 +18,7 @@ public:
 
 	// Create any moving objects
 	int InitialiseObjects();
+	void intialiseFonts();
 
 	/** Draw any strings */
 	void DrawStrings();
@@ -37,6 +33,23 @@ public:
 
 	// Handle pressing of a key
 	virtual void KeyDown(int iKeyCode);
+
+	void DrawScreen();
+	void DrawChanges();
+
+
+public:
+	// State number
+	enum State { stateInit, stateMain, statePaused, endGame };
+
+private:
+	State m_state;
+	int score;
+
+	Font* smallFont;
+	Font* mediumFont;
+	Font* largeFont;
+
 };
 
 #endif

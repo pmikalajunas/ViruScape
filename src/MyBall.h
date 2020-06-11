@@ -14,6 +14,7 @@ class MyBall : public DisplayableObject
         double GetYSpeed(void);
         bool getTileCollision(void);
         void setTileCollision(bool tileCollision);
+        bool getTouchedGround(void);
 
 
     protected:
@@ -30,6 +31,7 @@ class MyBall : public DisplayableObject
         int height;
         double tileBounce;
         bool touchedTile;
+        bool touchedGround;
 };
 
 #endif // MYBALL_H

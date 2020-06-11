@@ -14,110 +14,18 @@
 #include "Tile.h"
 #include "MyBall.h"
 
-// This draws and moves the simple rectangle on the screen
-class SimpleShape : public DisplayableObject
+
+
+
+MyProjectMain::MyProjectMain(void) : BaseEngine( 50 ), 
+m_state(stateInit), score(0)
 {
-private:
-	double m_dSX;
-	double m_dSY;
-	double m_dX;
-	double m_dY;
+	intialiseFonts();
+}
 
-public:
-	// Constructor has to set up all of the position and size members
-	SimpleShape(MyProjectMain* pEngine )
-		: DisplayableObject( pEngine )
-	{
-		// The ball coordinate will be the centre of the ball
-		// Because we start drawing half the size to the top-left.
-		m_iStartDrawPosX = -50;
-		m_iStartDrawPosY = -25;
-		// Record the ball size as both height and width
-		m_iDrawWidth = 100;
-		m_iDrawHeight = 50;
-		// Just put it somewhere initially
-		m_dX = m_iPreviousScreenX = m_iCurrentScreenX = m_iDrawWidth;
-		m_dY = m_iPreviousScreenY = m_iCurrentScreenY = m_iDrawHeight;
-		// Speed
-		m_dSX = 1;
-		m_dSY = 1;
-		// And make it visible
-		SetVisible(true);
-	}
-
-	// Draw the shape - just draws a rectangle
-	void Draw()
-	{
-		GetEngine()->DrawScreenRectangle(
-			m_iCurrentScreenX - m_iDrawWidth/2 + 1,
-			m_iCurrentScreenY - m_iDrawHeight/2 + 1,
-			m_iCurrentScreenX + m_iDrawWidth/2 -1,
-			m_iCurrentScreenY + m_iDrawHeight/2 -1,
-			0xffff00 );
-
-		// This will store the position at which the object was drawn
-		// so that the background can be drawn over the top.
-		// This will then remove the object from the screen.
-		StoreLastScreenPositionAndUpdateRect();
-	}
-
-	// Called frequently, this should move the item
-	// In this case we also accept cursor key presses to change the speed
-	// Space will set the speed to zero
-	void DoUpdate( int iCurrentTime )
-	{
-		// Change speed if player presses a key
-		if ( GetEngine()->IsKeyPressed( SDLK_UP ) )
-			m_dSY -= 0.001;
-		if ( GetEngine()->IsKeyPressed( SDLK_DOWN ) )
-			m_dSY += 0.001;
-		if ( GetEngine()->IsKeyPressed( SDLK_LEFT ) )
-			m_dSX -= 0.001;
-		if ( GetEngine()->IsKeyPressed( SDLK_RIGHT ) )
-			m_dSX += 0.001;
-		if ( GetEngine()->IsKeyPressed( SDLK_SPACE ) )
-			m_dSX = m_dSY = 0;
-
-		// Alter position for speed
-		m_dX += m_dSX;
-		m_dY += m_dSY;
-
-		// Check for bounce off the edge
-		if ( (m_dX+m_iStartDrawPosX) < 0 )
-		{
-			m_dX = - m_iStartDrawPosX;
-			if ( m_dSX < 0 )
-				m_dSX = -m_dSX;
-		}
-		if ( (m_dX+m_iStartDrawPosX+m_iDrawWidth) > (GetEngine()->GetScreenWidth()-1) )
-		{
-			m_dX = GetEngine()->GetScreenWidth() -1 - m_iStartDrawPosX - m_iDrawWidth;
-			if ( m_dSX > 0 )
-				m_dSX = -m_dSX;
-		}
-		if ( (m_dY+m_iStartDrawPosY) < 0 )
-		{
-			m_dY = -m_iStartDrawPosY;
-			if ( m_dSY < 0 )
-				m_dSY = -m_dSY;
-		}
-		if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
-		{
-			m_dY = GetEngine()->GetScreenHeight() -1 - m_iStartDrawPosY - m_iDrawHeight;
-			if ( m_dSY > 0 )
-				m_dSY = -m_dSY;
-		}
-
-		// Set current position - you NEED to set the current positions
-		m_iCurrentScreenX = (int)(m_dX+0.5);
-		m_iCurrentScreenY = (int)(m_dY+0.5);
-
-		printf("Position %f, %f\n", m_dX, m_dY );
-
-		// Ensure that the object gets redrawn on the display, if something changed
-		RedrawObjects();
-	}
-};
+MyProjectMain::~MyProjectMain(void)
+{
+}
 
 
 /*
@@ -159,21 +67,43 @@ int MyProjectMain::InitialiseObjects()
 }
 
 
+void MyProjectMain::intialiseFonts(){
+	smallFont = GetFont("neuropol x rg.ttf", 16);
+	mediumFont = GetFont("neuropol x rg.ttf", 20);
+	largeFont = GetFont("neuropol x rg.ttf", 48);
+}
+
 
 /* Draw text labels */
 void MyProjectMain::DrawStrings()
 {
-	// Build the string to print
-	char buf[128];
-	sprintf( buf, "Changing text %6d %6d", rand(), rand() );
-	// Clear the top of the screen, since we about to draw text on it.
-	CopyBackgroundPixels( 0, 0, GetScreenWidth(), 35 );
-	// Then draw the strings
-	 ( 150, 10, buf, 0xffffff, NULL );
-	// And mark that area of the screen as having been changed, so it gets redrawn
-	SetNextUpdateRect( 0/*X*/, 0/*Y*/, GetScreenWidth(), 35/*Height*/ );
+	// NEW SWITCH
+	switch( m_state )
+	{
+		case stateInit:
+			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			DrawScreenString( 169, 280, "Initialised and waiting for SPACE", 0x0, mediumFont );
+			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			break;
+		case stateMain:
+			char buf[64];
+			sprintf( buf, "Score:%d", score);
+			CopyBackgroundPixels( 0/*X*/, 0/*Y*/, GetScreenWidth(), 30/*Height*/ );
+			DrawScreenString(600, 10, buf, 0x0, mediumFont );
+			SetNextUpdateRect( 0/*X*/, 0/*Y*/, GetScreenWidth(), 30/*Height*/ );
+			break;
+		case statePaused:
+			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			DrawScreenString( 169, 280, "Paused. Press SPACE to continue", 0x0, mediumFont );
+			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			break;
+		case endGame:
+			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			DrawScreenString( 169, 280, "Scores", 0x0, smallFont );
+			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			break;
+	}
 }
-
 
 /* Overridden GameAction which can be modified */
 void MyProjectMain::GameAction()
@@ -185,8 +115,18 @@ void MyProjectMain::GameAction()
 	// Don't act for another 10 ticks
 	SetTimeToAct( 1 );
 
-	// Tell all objects to update themselves
-	UpdateAllObjects( GetTime() );
+	// NEW SWITCH
+	switch( m_state )
+	{
+	case stateInit:
+	case statePaused:
+	case endGame:
+		break;
+	case stateMain:
+		// Only tell objects to move when not paused etc
+		UpdateAllObjects( GetTime() );
+		break;
+	}
 }
 
 
@@ -199,10 +139,22 @@ void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 		{
 			m_ppDisplayableObjects[i]->DoUpdate(iCurrentTime);
 			MyBall* myBall = dynamic_cast<MyBall*>(m_ppDisplayableObjects[0]);
+			// End the game if ball touched the ground.
+			if (myBall->getTouchedGround()) {
+				m_state = endGame;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				return;
+			}
+
+			
 			// If it's a tile object
 			if (i != 0 && myBall->getTileCollision()) {
 				Tile* tile = dynamic_cast<Tile*>(m_ppDisplayableObjects[i]);
 				tile->setTileYSpeed(0.2);
+				score += 1;
 			}
 			if ( m_iDrawableObjectsChanged )
 				return; // Abort! Something changed in the array
@@ -227,8 +179,70 @@ void MyProjectMain::KeyDown(int iKeyCode)
             SetExitWithCode( 0 );
             break;
 
-        case SDLK_SPACE: // SPACE Pauses
-            break;
+		case SDLK_SPACE: // SPACE Pauses
+			switch( m_state )
+			{
+			case stateInit:
+				// Go to state main
+				m_state = stateMain;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
+			case stateMain:
+				// Go to state paused
+				m_state = statePaused;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
+			case statePaused:
+				// Go to state main
+				m_state = stateMain;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
+			} // End switch on current state
+			break; // End of case SPACE
 	}
 
+}
+
+
+/* Draw the changes to the screen.
+Remove the changing objects, redraw the strings and draw the changing objects again.
+ */
+void MyProjectMain::DrawChanges()
+{
+	// NEW IF
+	if ( m_state == stateInit || m_state == endGame )
+		return; // Do not draw objects if initialising
+
+	// Remove objects from their old positions
+	UndrawChangingObjects();
+	// Draw the text for the user
+	DrawStrings();
+	// Draw objects at their new positions
+	DrawChangingObjects();
+}
+
+/* Draw the screen - copy the background buffer, then draw the text and objects. */
+void MyProjectMain::DrawScreen()
+{
+	// First draw the background
+	//this->CopyBackgroundPixels( 100, 100, 100, 100 );
+	CopyAllBackgroundBuffer();
+	// And finally, draw the text
+	DrawStrings();
+
+	// NEW IF
+	if ( m_state == stateInit || m_state == endGame )
+		return; // Do not draw objects if initialising
+
+	// Then draw the changing objects
+	DrawChangingObjects();
 }

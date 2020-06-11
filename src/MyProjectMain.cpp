@@ -13,14 +13,21 @@
 #include "DisplayableObject.h"
 #include "Tile.h"
 #include "MyBall.h"
+#include <iostream>
 
-
+using namespace std; 
 
 
 MyProjectMain::MyProjectMain(void) : BaseEngine( 50 ), 
 m_state(stateInit), score(0)
 {
 	intialiseFonts();
+
+	scores["jimmy"] = 20;
+	scores["john"] = 10;
+	scores["james"] = 30;
+
+
 }
 
 MyProjectMain::~MyProjectMain(void)
@@ -100,7 +107,19 @@ void MyProjectMain::DrawStrings()
 		case endGame:
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			DrawScreenString( 169, 280, "Scores", 0x0, smallFont );
+
+			int y = 300;
+			for (auto& x : scores){
+				char buf[64];
+				sprintf( buf, "%s: %d", x.first.c_str(), x.second);
+				DrawScreenString( 169, y, buf, 0x0, smallFont );
+				y += 20;
+			}
+
+
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+
+
 			break;
 	}
 }

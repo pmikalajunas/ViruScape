@@ -2,7 +2,9 @@
 #define MYPROJECTMAIN_H
 
 #include "BaseEngine.h"
+#include <unordered_map>
 
+using namespace std;
 
 
 class MyProjectMain : public BaseEngine
@@ -49,6 +51,9 @@ private:
 	Font* smallFont;
 	Font* mediumFont;
 	Font* largeFont;
+
+	// Stores all the scores.
+	unordered_map<string, int> scores;
 
 };
 

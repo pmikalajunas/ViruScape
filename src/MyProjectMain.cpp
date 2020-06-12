@@ -23,8 +23,6 @@ m_state(stateInit), score(0)
 {
 
 	reader = new FileReader();
-	reader->readScores("scores.txt");
-
 	intialiseFonts();
 
 }
@@ -88,11 +86,14 @@ void MyProjectMain::DrawStrings()
 	{
 		case stateInit:
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
+			DrawScreenString( 169, 30, "BouncyBall", 0x0, largeFont );
 			DrawScreenString( 169, 280, "Initialised and waiting for SPACE", 0x0, mediumFont );
+			char buf[128];
+			sprintf( buf, "Playing as: %s", reader->getPlayer().c_str());
+			DrawScreenString( 169, 300, buf, 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			break;
 		case stateMain:
-			char buf[64];
 			sprintf( buf, "Score:%d", score);
 			CopyBackgroundPixels( 0/*X*/, 0/*Y*/, GetScreenWidth(), 30/*Height*/ );
 			DrawScreenString(600, 10, buf, 0x0, mediumFont );
@@ -105,21 +106,18 @@ void MyProjectMain::DrawStrings()
 			break;
 		case endGame:
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
-			DrawScreenString( 169, 280, "Scores", 0x0, smallFont );
-
+			DrawScreenString( 150, 50, "Leader Board", 0x0, largeFont );
 			unordered_map<string, int> scores = reader->getScores();
-			int y = 300;
+			int y = 120;
 			for (auto& x : scores){
 				char buf[64];
 				sprintf( buf, "%s: %d", x.first.c_str(), x.second);
-				DrawScreenString( 169, y, buf, 0x0, smallFont );
+				DrawScreenString( 160, y, buf, 0x0, mediumFont );
 				y += 20;
 			}
-
-
+			DrawScreenString( 150, 500, "Press 'Space' to play again", 0x0, mediumFont );
+			DrawScreenString( 150, 520, "Press 'Esc' to exit the game", 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
-
-
 			break;
 	}
 }
@@ -137,14 +135,14 @@ void MyProjectMain::GameAction()
 	// NEW SWITCH
 	switch( m_state )
 	{
-	case stateInit:
-	case statePaused:
-	case endGame:
-		break;
-	case stateMain:
-		// Only tell objects to move when not paused etc
-		UpdateAllObjects( GetTime() );
-		break;
+		case stateInit:
+		case statePaused:
+		case endGame:
+			break;
+		case stateMain:
+			// Only tell objects to move when not paused etc
+			UpdateAllObjects( GetTime() );
+			break;
 	}
 }
 
@@ -161,6 +159,9 @@ void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 			// End the game if ball touched the ground.
 			if (myBall->getTouchedGround()) {
 				m_state = endGame;
+				// Add and Save player's score.
+				reader->addScore(score);
+				reader->writeScores();
 				// Force redraw of background
 				SetupBackgroundBuffer();
 				// Redraw the whole screen now
@@ -225,10 +226,26 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				// Redraw the whole screen now
 				Redraw(true);
 				break;
+			case endGame:
+				m_state = stateMain;
+				printf("endgame\n");
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				resetGame();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
 			} // End switch on current state
 			break; // End of case SPACE
 	}
 
+}
+
+
+void::MyProjectMain::resetGame() {
+	reader = new FileReader();
+	InitialiseObjects();
+	score = 0;
 }
 
 

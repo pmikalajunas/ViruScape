@@ -5,22 +5,29 @@
 
 using namespace std;
 
-#define FILE_NAME "scores.txt"
+#define SCORES_FILE "scores.txt"
+#define PLAYER_FILE "player.txt"
 
 class FileReader
 {
     public:
         FileReader();
         virtual ~FileReader();
-        void readScores(string fileName);
+        void readScores();
+        void writeScores();
+        void readPlayer();
+        void addScore(int score);
 
         unordered_map<string, int> getScores() { return scores; }
+        string getPlayer() { return player; }
 
     protected:
 
     private:
         // Stores all the scores.
 	    unordered_map<string, int> scores;
+        // Current player's name.
+        string player;  
 };
 
 #endif // FILEREADER_H

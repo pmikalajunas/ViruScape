@@ -1,7 +1,7 @@
 #ifndef MYBALL_H
 #define MYBALL_H
 
-#include <DisplayableObject.h>
+#include "DisplayableObject.h"
 
 
 class MyBall : public DisplayableObject

@@ -40,6 +40,8 @@ public:
 	void DrawScreen();
 	void DrawChanges();
 
+	void resetGame();
+
 
 public:
 	// State number

@@ -216,5 +216,9 @@ void MyBall::setTileCollision(bool tileCollision) {
 }
 
 bool MyBall::getTouchedGround(){
+    if (touchedGround) {
+        touchedGround = false;
+        return true;
+    }
     return touchedGround;
 }

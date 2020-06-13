@@ -94,6 +94,7 @@ void Virus::setPlayerPositionToVirus() {
 
 void Virus::FollowPlayer(double enemyX, double enemyY) {
 
+
     setPlayerPositionToVirus();
 
     // Put the virus close to the enemy, set it visible.
@@ -110,7 +111,7 @@ void Virus::DoUpdate( int iCurrentTime ) {
     }
 
     // Reduce the time between updating the position of the virus.
-    if (iCurrentTime % 2 != 0) {
+    if (iCurrentTime % 15 != 0) {
         RedrawObjects();
         return;
     }

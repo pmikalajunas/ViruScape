@@ -443,12 +443,12 @@
 1591976263 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.h
 	<unordered_map>
 
-1592056483 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
+1592065985 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
 	"header.h"
 	"templates.h"
 	"EnemyTile.h"
 
-1592055534 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
+1592065900 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
 	"Tile.h"
 	"Virus.h"
 
@@ -459,22 +459,24 @@
 	<string>
 	"Constants.h"
 
-1592060517 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
+1592066000 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
 	"header.h"
 	"templates.h"
 	"Virus.h"
 	"Constants.h"
 
-1592060141 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+1592064073 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	"Constants.h"
 
-1592042336 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592065380 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
 	"MyPlayer.h"
+	"Virus.h"
+	"Constants.h"
 
-1592062233 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592065272 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 

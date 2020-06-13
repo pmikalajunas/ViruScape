@@ -1,4 +1,4 @@
-Paulius 1690
-William 2
-Paul 5
 John 2
+Paul 5
+William 2
+Paulius 1690

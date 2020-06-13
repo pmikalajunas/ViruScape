@@ -1,6 +1,9 @@
 #define BASE_SCREEN_WIDTH 800
 #define BASE_SCREEN_HEIGHT 600
 
+// Distance from where virus spreads.
+#define SPREADING_DISTANCE 40
+
 #define NW 100
 #define SE 101
 #define SW 102

@@ -2,6 +2,8 @@
 #include "header.h"
 #include "templates.h"
 #include "MyPlayer.h"
+#include "Virus.h"
+#include "Constants.h"
 
 MyPlayer::MyPlayer(BaseEngine* pEngine) : DisplayableObject(pEngine),
 m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
@@ -63,62 +65,67 @@ double MyPlayer::GetYSpeed() {
     return m_dSY;
 }
 
+
+double MyPlayer::calculatePlayersDistanceToObject(DisplayableObject* pObject) {
+
+    int testX = m_dX;
+    int testY = m_dY;
+    // Get obstacle's X and Y.
+    int ox = pObject->getCurrentScreenX();
+    int oy = pObject->getCurrentScreenY();
+    // Get obstacle's width and height.
+    int ow = pObject->getDrawWidth();
+    int oh = pObject->getDrawHeight();
+
+    // Ball is to the left of the obstacble.
+    if (m_dX < ox) {
+        testX = ox;
+    }
+    // Ball is to the right of the obstacble.
+    else if (m_dX > ox + ow) {
+        testX = ox + ow;
+    }
+    // Ball is above the obstacle.
+    if (m_dY < oy) {
+        testY = oy;
+    }
+    // Ball is below the obstacle.
+    else if (m_dY > oy + oh) {
+        testY = oy + oh;
+    }
+
+    distanceXToObject = m_dX - testX;
+    distanceYToObject = m_dY - testY;
+    return sqrt( (distanceXToObject*distanceXToObject) + (distanceYToObject*distanceYToObject) );
+}
+
+
 void MyPlayer::DoUpdate(int currentTime)
 {
 
     DisplayableObject* pObject;
     for (int iObjectId = 0; (pObject = m_pMainEngine->GetDisplayableObject(iObjectId)) != NULL; iObjectId++)
     {
-
         if ( pObject == this ) // This is us, skip it
             continue;
 
-
-        int testX = m_dX;
-        int testY = m_dY;
-        // Get obstacle's X and Y.
-        int ox = pObject->getCurrentScreenX();
-        int oy = pObject->getCurrentScreenY();
-        // Get obstacle's width and height.
-        int ow = pObject->getDrawWidth();
-        int oh = pObject->getDrawHeight();
-
-        // Ball is to the left of the obstacble.
-        if (m_dX < ox) {
-            testX = ox;
-            //printf("left\n");
-        }
-
-        // Ball is to the right of the obstacble.
-        else if (m_dX > ox + ow) {
-            testX = ox + ow;
-            //printf("right\n");
-        }
-
-        // Ball is above the obstacle.
-        if (m_dY < oy) {
-            testY = oy;
-            //printf("above\n");
-        }
-
-        // Ball is below the obstacle.
-        else if (m_dY > oy + oh) {
-            testY = oy + oh;
-            //printf("below\n");
-        }
-
-        double distX = m_dX - testX;
-        double distY = m_dY - testY;
-        double distance = sqrt( (distX*distX) + (distY*distY) );
+        double distance = calculatePlayersDistanceToObject(pObject);
         int radius = height / 2;
+
+        // If the virus hits us, we are done.
+        if (distance < SPREADING_DISTANCE && dynamic_cast<Virus*>(pObject) != NULL) {
+            printf("Touched virus\n");
+            touchedGround = true;
+            return;
+        }
 
         // If the ball is slightly above the tile, we bounce it up
         if ( distance <= (radius + 5) && distance >= radius) {
-            if (distY < 0) {
+            if (distanceYToObject < 0) {
                 touchedTile = true;
                 m_dSY *= -tileBounce;
                 m_dY -= 5;
-                printf("Collision distX: %.2f distY: %.2f\n", distX, distY);
+                printf("Collision distX: %.2f distY: %.2f\n", distanceXToObject, distanceYToObject);
             }
         }
     }

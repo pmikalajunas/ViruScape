@@ -3,7 +3,7 @@
 #include "EnemyTile.h"
 
 EnemyTile::EnemyTile(BaseEngine* pEngine, int initialX, int initialY, Virus* virus) 
-: Tile(pEngine, initialX, initialY), reset(false), virus(virus)
+: Tile(pEngine, initialX, initialY), reset(false), virus(virus), virusReleased(true)
 {
     // Load tile image.
     tileImage = new ImageSurface();
@@ -50,6 +50,18 @@ void EnemyTile::DoUpdate( int iCurrentTime )
     m_dX += m_dSX;
     m_dY += m_dSY;
 
+
+    // Release the virus if it haven's been released ...
+    // and tile reached 100 pixels
+    if (m_dY > 100 && !virusReleased) {
+
+        // Find x and y of the player.
+        int playerX = m_dX + (m_iDrawWidth / 2);
+        int playerY = m_dY + (m_iDrawHeight / 3);
+        virus->FollowPlayer(playerX, playerY);
+        virusReleased = true;
+    }
+
     // Left boundary
     if ( (m_dX+m_iStartDrawPosX) < 0 )
     {
@@ -69,10 +81,10 @@ void EnemyTile::DoUpdate( int iCurrentTime )
     if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
     {
         reset = true;
-        // Activate the virus.
         m_dY = -20;
-        virus->FollowPlayer(m_dX, 20);
         m_dX = rand() % (BASE_SCREEN_WIDTH - m_iDrawWidth);
+        // Reset the virus release flag.
+        virusReleased = false;
     }
 
     // Set current position - you NEED to set the current positions

@@ -19,10 +19,10 @@ class MyPlayer : public DisplayableObject
         bool getTileCollision(void);
         void setTileCollision(bool tileCollision);
         bool getTouchedGround(void);
+        double calculatePlayersDistanceToObject(DisplayableObject* pObject);
 
         int getXPosition() { return m_iCurrentScreenX; }
         int getYPosition() { return m_iCurrentScreenY; }
-
 
     protected:
 
@@ -35,6 +35,8 @@ class MyPlayer : public DisplayableObject
         double gravity;
         double friction;
         double bounce;
+        double distanceXToObject;
+        double distanceYToObject;
         int height;
         double tileBounce;
         bool touchedTile;

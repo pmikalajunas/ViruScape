@@ -452,18 +452,20 @@
 	"Tile.h"
 	"Virus.h"
 
-1592055724 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.h
+1592062002 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.h
 	<DisplayableObject.h>
 	"JPGImage.h"
 	"MyPlayer.h"
+	<string>
+	"Constants.h"
 
-1592059267 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
+1592060517 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
 	"header.h"
 	"templates.h"
 	"Virus.h"
 	"Constants.h"
 
-1592052165 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+1592060141 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	"Constants.h"
@@ -474,5 +476,5 @@
 	"templates.h"
 	"MyPlayer.h"
 
-1592052157 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592062233 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 

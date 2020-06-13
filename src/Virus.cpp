@@ -57,71 +57,96 @@ void Virus::Draw() {
 }
 
 
+/*
+    Function sets playerPositionToVirus based on player's and virus locations.
+*/
+void Virus::setPlayerPositionToVirus() {
+
+    // Set player coordinates so that the virus could follow.
+    playerX = player->getXPosition();
+    playerY = player->getYPosition();
+
+    if (playerX > m_iCurrentScreenX && playerY > m_iCurrentScreenY)
+		playerPositionToVirus = NW;
+
+	else if (playerX < m_iCurrentScreenX && playerY < m_iCurrentScreenY)
+		playerPositionToVirus = SE;
+
+	else if (playerX > m_iCurrentScreenX && playerY < m_iCurrentScreenY)
+		playerPositionToVirus = SW;
+
+	else if (playerX < m_iCurrentScreenX && playerY > m_iCurrentScreenY)
+        playerPositionToVirus = NE;
+
+	else if (playerX == m_iCurrentScreenX && playerY > m_iCurrentScreenY)
+        playerPositionToVirus = N;
+
+	else if (playerX == m_iCurrentScreenX && playerY < m_iCurrentScreenY)
+        playerPositionToVirus = S;
+
+	else if (playerY == m_iCurrentScreenY && playerX > m_iCurrentScreenX)
+        playerPositionToVirus = W;
+
+	else if (playerY == m_iCurrentScreenY && playerX < m_iCurrentScreenX)
+        playerPositionToVirus = E;
+
+}
+
 void Virus::FollowPlayer(double enemyX, double enemyY) {
-    // Reset the speed of the virus.
-    m_dSX = 0;
-    m_dSY = 0;
+
+    setPlayerPositionToVirus();
+
     // Put the virus close to the enemy, set it visible.
-    m_dX = m_iCurrentScreenX = enemyX;
-    m_dY = m_iCurrentScreenY = enemyY;
+    m_iCurrentScreenX = enemyX;
+    m_iCurrentScreenY = enemyY;
     SetVisible(true);
 }
 
 void Virus::DoUpdate( int iCurrentTime ) {
 
     if(!IsVisible()) {
+        RedrawObjects();
         return;
     }
 
-    double playerX = player->getXPosition();
-    double playerY = player->getYPosition();
+    // Reduce the time between updating the position of the virus.
+    if (iCurrentTime % 2 != 0) {
+        RedrawObjects();
+        return;
+    }
 
-    // Check player position, adjust speed accordingly.
-    if (playerX > m_iCurrentScreenX && playerY > m_iCurrentScreenY)
-	{
-		m_dSY = 0.2;
-		m_dSX = 0.2;
-	}
-	else if (playerX < m_iCurrentScreenX && playerY < m_iCurrentScreenY)
-	{
-        
-		m_dSY = -0.2;
-		m_dSX = -0.2;
-	}
-	else if (playerX > m_iCurrentScreenX && playerY < m_iCurrentScreenY)
-	{
-		m_dSY = -0.2;
-		m_dSX = -0.2;
-	}
-	else if (playerX < m_iCurrentScreenX && playerY > m_iCurrentScreenY)
-	{
-		m_dSY = -0.2;
-		m_dSX = -0.2;
-	} 
-	else if (playerX == m_iCurrentScreenX && playerY > m_iCurrentScreenY)
-	{
-		m_dSY = 0.2;
-        m_dSX = 0;
-	}
-	else if (playerX == m_iCurrentScreenX && playerY < m_iCurrentScreenY)
-	{
-		m_dSY = -0.2;
-        m_dSX = 0;
-	}
-	else if (playerY == m_iCurrentScreenY && playerX > m_iCurrentScreenX)
-	{
-		m_dSX = 0.2;
-        m_dSY = 0;
-	}
-	else if (playerY == m_iCurrentScreenY && playerX < m_iCurrentScreenX)
-	{
-		m_dSX = -0.2;
-        m_dSY = 0;
-	}
-
-    // Change tile position on their current speed.
-    m_dX += m_dSX;
-    m_dY += m_dSY;
+    switch(playerPositionToVirus) {
+        case NW:
+            m_iCurrentScreenY += 1;
+		    m_iCurrentScreenX += 1;
+            break;
+        case SE:
+            m_iCurrentScreenY -= 1;
+		    m_iCurrentScreenX -= 1;
+            break;
+        case SW:
+            m_iCurrentScreenY -= 1;
+		    m_iCurrentScreenX += 1;
+            break;
+        case NE:
+            m_iCurrentScreenY += 1;
+		    m_iCurrentScreenX -= 1;
+            break;
+        case N:
+            m_iCurrentScreenY += 1;
+            break;
+        case S:
+            m_iCurrentScreenY -= 1;
+            break;
+        case W:
+            m_iCurrentScreenX += 1;
+            break;
+        case E:
+            m_iCurrentScreenX -= 1;
+            break;
+        default:
+            break;
+    }
 
     // Hide image once it crosses the boundaries of the screen.
 	if (m_iCurrentScreenY >= BASE_SCREEN_HEIGHT || m_iCurrentScreenY <= 0)
@@ -135,13 +160,6 @@ void Virus::DoUpdate( int iCurrentTime ) {
 		SetVisible(false);
 	}
 
-    	// Work out current position
-	m_iCurrentScreenX = (int)(m_dX+0.5);
-	m_iCurrentScreenY = (int)(m_dY+0.5);
-
 	// Ensure that the object gets redrawn on the display, if something changed
 	RedrawObjects();
-
-
 }
-

@@ -20,8 +20,8 @@ class MyPlayer : public DisplayableObject
         void setTileCollision(bool tileCollision);
         bool getTouchedGround(void);
 
-        double getXPosition() { return m_dX; }
-        double getYPosition() { return m_dY; }
+        int getXPosition() { return m_iCurrentScreenX; }
+        int getYPosition() { return m_iCurrentScreenY; }
 
 
     protected:

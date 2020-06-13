@@ -2,25 +2,27 @@
 #define TILE_H
 
 #include "DisplayableObject.h"
-
+#include "JPGImage.h"
 
 class Tile : public DisplayableObject
 {
-     private:
-        double m_dSX;
-        double m_dSY;
-        double m_dX;
-        double m_dY;
 
     public:
-        Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX);
+        Tile(BaseEngine* pEngine, int initialX, int initialY);
         virtual ~Tile();
         void Draw(void);
         void DoUpdate(int currentTime);
         void setTileYSpeed(double ySpeed);
 
+    private:
+
 
     protected:
+        ImageSurface* tileImage;
+        double m_dSX;
+        double m_dSY;
+        double m_dX;
+        double m_dY;
 
 
 

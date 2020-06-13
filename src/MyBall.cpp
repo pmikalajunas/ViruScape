@@ -3,20 +3,27 @@
 #include "templates.h"
 #include "MyBall.h"
 
-MyBall::MyBall(BaseEngine* pEngine, int size) : DisplayableObject(pEngine),
-m_pMainEngine( pEngine ), height(size), touchedTile(false), touchedGround(false)
+MyBall::MyBall(BaseEngine* pEngine) : DisplayableObject(pEngine),
+m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
 {
+
+    // Load frog image.
+    frogImage = new ImageSurface();
+    frogImage->LoadImage("frog.png");
+
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = 380;
     m_iCurrentScreenY = m_iPreviousScreenY = 300;
 
-    // Set ball coordinate to the centre of the ball.
-    m_iStartDrawPosX = - size / 2;
-    m_iStartDrawPosY = - size / 2;
+    height = frogImage->GetHeight();
+
+    // Draw position is object's left upper corner.
+    m_iStartDrawPosX = 0;
+    m_iStartDrawPosY = 0;
 
     // Record the ball size as both height and width.
-    m_iDrawWidth = size;
-    m_iDrawHeight = size;
+    m_iDrawWidth = frogImage->GetWidth();
+    m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
 
     // Speed.
     m_dSY = 0.2;
@@ -24,7 +31,7 @@ m_pMainEngine( pEngine ), height(size), touchedTile(false), touchedGround(false)
     gravity = 0.0019;
     friction = 0.98;
     bounce = 1;
-    tileBounce = 1.2;
+    tileBounce = 1.1;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -41,22 +48,10 @@ MyBall::~MyBall()
 void MyBall::Draw(void)
 {
 
-	unsigned int uiColourMult = 0x010001;
-	unsigned int uiColourText = 0xffffff;
-
-	// Concentric circles for pseudo-sphere
-	int iRadiusSquared = (m_iDrawWidth/2) * (m_iDrawWidth/2);
-	int iCentreX = m_iCurrentScreenX + m_iStartDrawPosX + m_iDrawWidth/2;
-	int iCentreY = m_iCurrentScreenY + m_iStartDrawPosY + m_iDrawHeight/2;
-	for ( int iX = m_iCurrentScreenX + m_iStartDrawPosX ; iX < (m_iCurrentScreenX + m_iStartDrawPosX + m_iDrawWidth) ; iX++ )
-		for ( int iY = m_iCurrentScreenY + m_iStartDrawPosY ; iY < (m_iCurrentScreenY + m_iStartDrawPosY + m_iDrawHeight) ; iY++ )
-			if ( ( (iX-iCentreX)*(iX-iCentreX) + (iY-iCentreY)*(iY-iCentreY) ) <= iRadiusSquared )
-			{
-				// 0xB0 is the range of values, 0xff is the brightest value.
-				unsigned int uiColour = (0xB0 * ((iX-iCentreX)*(iX-iCentreX) + (iY-iCentreY)*(iY-iCentreY))) / iRadiusSquared;
-				uiColour = 0xff - uiColour;
-				GetEngine()->SafeSetScreenPixel( iX, iY, uiColourMult * uiColour );
-			}
+    frogImage->RenderImage(GetEngine()->GetForeground(),
+    0, 0,
+    m_iCurrentScreenX, m_iCurrentScreenY,
+    frogImage->GetWidth(), frogImage->GetHeight());
 
     // This will store the position at which the object was drawn
     // so that the background can be drawn over the top.
@@ -117,10 +112,12 @@ void MyBall::DoUpdate(int currentTime)
         double distance = sqrt( (distX*distX) + (distY*distY) );
         int radius = height / 2;
 
-        if (distance <= radius) {
-            if (distY > -radius && distY < (-radius + 1)) {
+        // If the ball is slightly above the tile, we bounce it up
+        if ( distance <= (radius + 5) && distance >= radius) {
+            if (distY < 0) {
                 touchedTile = true;
                 m_dSY *= -tileBounce;
+                m_dY -= 5;
                 printf("Collision distX: %.2f distY: %.2f\n", distX, distY);
             }
         }

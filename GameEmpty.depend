@@ -192,7 +192,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1591890923 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\baseengine.cpp
+1591978248 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\baseengine.cpp
 	"header.h"
 	<SDL_syswm.h>
 	<math.h>
@@ -325,7 +325,7 @@
 	"header.h"
 	"Demo3TileManager.h"
 
-1591883694 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4main.cpp
+1591978996 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo4main.cpp
 	"header.h"
 	"BaseEngine.h"
 	"Demo4Object.h"
@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1591975239 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592034555 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -401,6 +401,7 @@
 	"TileManager.h"
 	"DisplayableObject.h"
 	"Tile.h"
+	"EnemyTile.h"
 	"MyBall.h"
 	<iostream>
 
@@ -414,27 +415,37 @@
 	"BaseEngine.h"
 	"TileManager.h"
 
-1591972485 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+1592034655 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
 	"DisplayableObject.h"
+	"JPGImage.h"
 
-1591866485 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1592025821 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
 
-1591974902 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.cpp
+1592024084 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
 	"MyBall.h"
 
-1591972496 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.h
+1592024130 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.h
 	"DisplayableObject.h"
+	"JPGImage.h"
 
-1591974172 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.cpp
+1591976260 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.cpp
 	<fstream>
 	"FileReader.h"
 
 1591976263 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.h
 	<unordered_map>
+
+1592034460 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
+	"header.h"
+	"templates.h"
+	"EnemyTile.h"
+
+1592033972 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
+	<Tile.h>
 

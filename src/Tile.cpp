@@ -6,8 +6,13 @@
 #define BASE_SCREEN_HEIGHT 600
 
 
-Tile::Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX) : DisplayableObject(pEngine)
+Tile::Tile(BaseEngine* pEngine, int initialX, int initialY) : DisplayableObject(pEngine)
 {
+
+    // Load tile image.
+    tileImage = new ImageSurface();
+    tileImage->LoadImage("tile.png");
+
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = initialX;
     m_iCurrentScreenY = m_iPreviousScreenY = initialY;
@@ -17,8 +22,8 @@ Tile::Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX) : Display
     m_iStartDrawPosY = 0;
 
     // Record the ball size as both height and width
-    m_iDrawWidth = sizeX;
-    m_iDrawHeight = 30;
+    m_iDrawWidth = tileImage->GetWidth();
+    m_iDrawHeight = tileImage->GetHeight();
 
     // Speed
     m_dSX = 0;
@@ -32,17 +37,19 @@ Tile::Tile(BaseEngine* pEngine, int initialX, int initialY, int sizeX) : Display
 
 Tile::~Tile()
 {
-    
+    m_dSX = 0;
+    m_dSY = 0;
+    m_dX = 0;
+    m_dY = 0;
 }
 
 
 void Tile::Draw(void)
 {
-    GetEngine()->DrawScreenRectangle(
-    m_iCurrentScreenX, m_iCurrentScreenY,
-    m_iCurrentScreenX + (m_iDrawWidth) - 1,
-    m_iCurrentScreenY + m_iDrawHeight - 1,
-    0x000000 );
+	tileImage->RenderImage(GetEngine()->GetForeground(),
+		0, 0,
+		m_iCurrentScreenX, m_iCurrentScreenY,
+		tileImage->GetWidth(), tileImage->GetHeight());
 
     // This will store the position at which the object was drawn
     // so that the background can be drawn over the top.
@@ -56,6 +63,10 @@ void Tile::Draw(void)
 void Tile::DoUpdate( int iCurrentTime )
 {
 
+    m_dSY -= 0.0001;
+    if(m_dSY < 0) {
+        m_dSY = 0;
+    }
 
     // Alter position for speed
     m_dX += m_dSX;

@@ -12,6 +12,7 @@
 
 #include "DisplayableObject.h"
 #include "Tile.h"
+#include "EnemyTile.h"
 #include "MyBall.h"
 #include <iostream>
 
@@ -40,6 +41,11 @@ void MyProjectMain::SetupBackgroundBuffer()
 {
 	FillBackground( 0xffffff );
 
+	// Draw the background.
+	ImageData im;
+	im.LoadImage( "bg.png" );
+	im.RenderImageWithMask(this->GetBackground(), 0, 0, 0, 0, im.GetWidth(), im.GetHeight());
+
 }
 
 
@@ -60,11 +66,11 @@ int MyProjectMain::InitialiseObjects()
 
 	// You MUST set the array entry after the last one that you create to NULL, so that the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
-	m_ppDisplayableObjects[0] = new MyBall(this, 60);
-	m_ppDisplayableObjects[1] = new Tile(this, 100, 300, 150);
-	m_ppDisplayableObjects[2] = new Tile(this, 500, 500, 150);
-	m_ppDisplayableObjects[3] = new Tile(this, 100, 600, 150);
-	m_ppDisplayableObjects[4] = new Tile(this, 500, 200, 150);
+	m_ppDisplayableObjects[0] = new MyBall(this);
+	m_ppDisplayableObjects[1] = new EnemyTile(this, 100, 300);
+	m_ppDisplayableObjects[2] = new Tile(this, 500, 500);
+	m_ppDisplayableObjects[3] = new Tile(this, 100, 600);
+	m_ppDisplayableObjects[4] = new Tile(this, 500, 200);
 	m_ppDisplayableObjects[5] = NULL;
 
 	return 0;
@@ -106,7 +112,7 @@ void MyProjectMain::DrawStrings()
 			break;
 		case endGame:
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
-			DrawScreenString( 150, 50, "Leader Board", 0x0, largeFont );
+			DrawScreenString( 150, 50, "LEADERBOARD", 0x0, largeFont );
 			unordered_map<string, int> scores = reader->getScores();
 			int y = 120;
 			for (auto& x : scores){
@@ -115,8 +121,8 @@ void MyProjectMain::DrawStrings()
 				DrawScreenString( 160, y, buf, 0x0, mediumFont );
 				y += 20;
 			}
-			DrawScreenString( 150, 500, "Press 'Space' to play again", 0x0, mediumFont );
-			DrawScreenString( 150, 520, "Press 'Esc' to exit the game", 0x0, mediumFont );
+			DrawScreenString( 150, 460, "Press 'Space' to play again", 0x0, mediumFont );
+			DrawScreenString( 150, 480, "Press 'Esc' to exit the game", 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			break;
 	}
@@ -210,14 +216,14 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				// Redraw the whole screen now
 				Redraw(true);
 				break;
-			case stateMain:
-				// Go to state paused
-				m_state = statePaused;
-				// Force redraw of background
-				SetupBackgroundBuffer();
-				// Redraw the whole screen now
-				Redraw(true);
-				break;
+			// case stateMain:
+			// 	// Go to state paused
+			// 	m_state = statePaused;
+			// 	// Force redraw of background
+			// 	SetupBackgroundBuffer();
+			// 	// Redraw the whole screen now
+			// 	Redraw(true);
+			// 	break;
 			case statePaused:
 				// Go to state main
 				m_state = stateMain;
@@ -228,7 +234,6 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				break;
 			case endGame:
 				m_state = stateMain;
-				printf("endgame\n");
 				// Force redraw of background
 				SetupBackgroundBuffer();
 				resetGame();
@@ -236,16 +241,18 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				Redraw(true);
 				break;
 			} // End switch on current state
-			break; // End of case SPACE
+			break;
 	}
 
 }
 
 
 void::MyProjectMain::resetGame() {
+
 	reader = new FileReader();
 	InitialiseObjects();
 	score = 0;
+	printf("Resetting the game...\n");
 }
 
 

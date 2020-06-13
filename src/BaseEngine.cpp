@@ -78,6 +78,7 @@ void BaseEngine::DestroyOldObjects()
 	{
 		for ( int i = 0 ; m_ppDisplayableObjects[i] != NULL ; i++ )
 		{
+			//printf("Destoying object %d\n", i);
 			delete m_ppDisplayableObjects[i];
 			m_ppDisplayableObjects[i] = NULL;
 		}

@@ -1,23 +1,27 @@
-#ifndef MYBALL_H
-#define MYBALL_H
+#ifndef MYPLAYER_H
+#define MYPLAYER_H
 
 #include "DisplayableObject.h"
 #include "JPGImage.h"
+#include "Constants.h"
 
 // We add the offset to the object.
 #define IMAGE_HEIGHT_OFFSET 10;
 
-class MyBall : public DisplayableObject
+class MyPlayer : public DisplayableObject
 {
     public:
-        MyBall(BaseEngine* pEngine);
-        virtual ~MyBall();
+        MyPlayer(BaseEngine* pEngine);
+        virtual ~MyPlayer();
         void Draw(void);
         void DoUpdate(int currentTime);
         double GetYSpeed(void);
         bool getTileCollision(void);
         void setTileCollision(bool tileCollision);
         bool getTouchedGround(void);
+
+        double getXPosition() { return m_dX; }
+        double getYPosition() { return m_dY; }
 
 
     protected:
@@ -38,4 +42,4 @@ class MyBall : public DisplayableObject
         ImageSurface* frogImage;
 };
 
-#endif // MYBALL_H
+#endif // MyPlayer_H

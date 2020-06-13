@@ -1,9 +1,9 @@
 #include <cmath>
 #include "header.h"
 #include "templates.h"
-#include "MyBall.h"
+#include "MyPlayer.h"
 
-MyBall::MyBall(BaseEngine* pEngine) : DisplayableObject(pEngine),
+MyPlayer::MyPlayer(BaseEngine* pEngine) : DisplayableObject(pEngine),
 m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
 {
 
@@ -40,12 +40,12 @@ m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
     SetVisible(true);
 }
 
-MyBall::~MyBall()
+MyPlayer::~MyPlayer()
 {
     //dtor
 }
 
-void MyBall::Draw(void)
+void MyPlayer::Draw(void)
 {
 
     frogImage->RenderImage(GetEngine()->GetForeground(),
@@ -59,11 +59,11 @@ void MyBall::Draw(void)
     StoreLastScreenPositionAndUpdateRect();
 }
 
-double MyBall::GetYSpeed() {
+double MyPlayer::GetYSpeed() {
     return m_dSY;
 }
 
-void MyBall::DoUpdate(int currentTime)
+void MyPlayer::DoUpdate(int currentTime)
 {
 
     DisplayableObject* pObject;
@@ -204,15 +204,15 @@ void MyBall::DoUpdate(int currentTime)
 }
 
 
-bool MyBall::getTileCollision(){
+bool MyPlayer::getTileCollision(){
     return touchedTile;
 }
 
-void MyBall::setTileCollision(bool tileCollision) {
+void MyPlayer::setTileCollision(bool tileCollision) {
     touchedTile = tileCollision;
 }
 
-bool MyBall::getTouchedGround(){
+bool MyPlayer::getTouchedGround(){
     if (touchedGround) {
         touchedGround = false;
         return true;

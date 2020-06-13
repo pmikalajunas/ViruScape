@@ -1,9 +1,8 @@
 #include "header.h"
 #include "templates.h"
 #include "Tile.h"
+#include "Constants.h"
 
-#define BASE_SCREEN_WIDTH 800
-#define BASE_SCREEN_HEIGHT 600
 
 
 Tile::Tile(BaseEngine* pEngine, int initialX, int initialY) : DisplayableObject(pEngine)
@@ -35,6 +34,7 @@ Tile::Tile(BaseEngine* pEngine, int initialX, int initialY) : DisplayableObject(
     SetVisible(true);
 }
 
+
 Tile::~Tile()
 {
     m_dSX = 0;
@@ -63,21 +63,20 @@ void Tile::Draw(void)
 void Tile::DoUpdate( int iCurrentTime )
 {
 
+    // Slowly reduce the speed of moving tiles.
     m_dSY -= 0.0001;
+    // Prevent tiles from going upwards.
     if(m_dSY < 0) {
         m_dSY = 0;
     }
 
-    // Alter position for speed
+    // Change tile position on their current speed.
     m_dX += m_dSX;
     m_dY += m_dSY;
-
-    //printf("Tile's initial m_dX: (%.2f), m_dY: (%.2f)\n", m_dX, m_dY );
 
     // Left boundary
     if ( (m_dX+m_iStartDrawPosX) < 0 )
     {
-        //printf("Case 1\n");
         m_dX = - m_iStartDrawPosX;
         if ( m_dSX < 0 )
             m_dSX = -m_dSX;
@@ -85,26 +84,16 @@ void Tile::DoUpdate( int iCurrentTime )
     // Right boundary.
     if ((m_dX + m_iStartDrawPosX + m_iDrawWidth) > (GetEngine()->GetScreenWidth()-1) )
     {
-        //printf("Case 2\n");
         m_dX = GetEngine()->GetScreenWidth() -1 - m_iStartDrawPosX - m_iDrawWidth;
         if ( m_dSX > 0 )
             m_dSX = -m_dSX;
     }
-    // Top
-    if ( (m_dY+m_iStartDrawPosY) < 0 )
-    {
-        //printf("Case 3\n");
-        m_dY = -m_iStartDrawPosY;
-        if ( m_dSY < 0 )
-            m_dSY = -m_dSY;
-    }
 
-    // Bottom
+    // Bottom, here we set random tile's x position.
     if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
     {
-        //printf("Case 4\n");
         m_dY = -20;
-
+        m_dX = rand() % (BASE_SCREEN_WIDTH - m_iDrawWidth);
     }
 
     // Set current position - you NEED to set the current positions
@@ -116,6 +105,9 @@ void Tile::DoUpdate( int iCurrentTime )
 }
 
 
+/*
+    Used to change tile's speed after player bounces off the tile.
+*/
 void Tile::setTileYSpeed(double ySpeed) {
     m_dSY = ySpeed;
     printf("setTileYSpeeed, m_dSY: %.2f\n", m_dSY);

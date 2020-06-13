@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592034555 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592055504 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -402,7 +402,8 @@
 	"DisplayableObject.h"
 	"Tile.h"
 	"EnemyTile.h"
-	"MyBall.h"
+	"Virus.h"
+	"MyPlayer.h"
 	<iostream>
 
 1591975000 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
@@ -419,10 +420,11 @@
 	"DisplayableObject.h"
 	"JPGImage.h"
 
-1592025821 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1592053008 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
+	"Constants.h"
 
 1592024084 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myball.cpp
 	<cmath>
@@ -441,11 +443,36 @@
 1591976263 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.h
 	<unordered_map>
 
-1592034460 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
+1592056483 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
 	"header.h"
 	"templates.h"
 	"EnemyTile.h"
 
-1592033972 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
-	<Tile.h>
+1592055534 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
+	"Tile.h"
+	"Virus.h"
+
+1592055724 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.h
+	<DisplayableObject.h>
+	"JPGImage.h"
+	"MyPlayer.h"
+
+1592059267 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
+	"header.h"
+	"templates.h"
+	"Virus.h"
+	"Constants.h"
+
+1592052165 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+	"DisplayableObject.h"
+	"JPGImage.h"
+	"Constants.h"
+
+1592042336 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+	<cmath>
+	"header.h"
+	"templates.h"
+	"MyPlayer.h"
+
+1592052157 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 

@@ -13,7 +13,8 @@
 #include "DisplayableObject.h"
 #include "Tile.h"
 #include "EnemyTile.h"
-#include "MyBall.h"
+#include "Virus.h"
+#include "MyPlayer.h"
 #include <iostream>
 
 using namespace std; 
@@ -62,16 +63,21 @@ int MyProjectMain::InitialiseObjects()
 	DestroyOldObjects();
 
 	// Create an array one element larger than the number of objects that you want.
-	m_ppDisplayableObjects = new DisplayableObject*[6];
+	m_ppDisplayableObjects = new DisplayableObject*[8];
 
-	// You MUST set the array entry after the last one that you create to NULL, so that the system knows when to stop.
+	// You MUST set the array entry after the last one that you create to NULL, so that ,the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
-	m_ppDisplayableObjects[0] = new MyBall(this);
-	m_ppDisplayableObjects[1] = new EnemyTile(this, 100, 300);
+	MyPlayer* player = new MyPlayer(this);
+	Virus* virus =  new Virus(this, player);
+	EnemyTile* enemyTile = new EnemyTile(this, 100, 300, virus);
+	m_ppDisplayableObjects[0] = player;
+	m_ppDisplayableObjects[1] = enemyTile;
 	m_ppDisplayableObjects[2] = new Tile(this, 500, 500);
-	m_ppDisplayableObjects[3] = new Tile(this, 100, 600);
+	m_ppDisplayableObjects[3] = new Tile(this, 400, 350);
 	m_ppDisplayableObjects[4] = new Tile(this, 500, 200);
-	m_ppDisplayableObjects[5] = NULL;
+	m_ppDisplayableObjects[5] = new Tile(this, 250, 400);
+	m_ppDisplayableObjects[6] = virus;
+	m_ppDisplayableObjects[7] = NULL;
 
 	return 0;
 }
@@ -161,32 +167,32 @@ void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 		for ( int i = 0 ; m_ppDisplayableObjects[i] != NULL ; i++ )
 		{
 			m_ppDisplayableObjects[i]->DoUpdate(iCurrentTime);
-			MyBall* myBall = dynamic_cast<MyBall*>(m_ppDisplayableObjects[0]);
+			MyPlayer* myPlayer = dynamic_cast<MyPlayer*>(m_ppDisplayableObjects[0]);
 			// End the game if ball touched the ground.
-			if (myBall->getTouchedGround()) {
+			if (myPlayer->getTouchedGround()) {
 				m_state = endGame;
 				// Add and Save player's score.
 				reader->addScore(score);
 				reader->writeScores();
-				// Force redraw of background
+				// Force redraw of background.
 				SetupBackgroundBuffer();
-				// Redraw the whole screen now
+				// Redraw the whole screen now.
 				Redraw(true);
 				return;
 			}
-
 			
-			// If it's a tile object
-			if (i != 0 && myBall->getTileCollision()) {
+			// If player touched a tile, get the tiles moving.
+			if (dynamic_cast<Tile*>(m_ppDisplayableObjects[i]) != NULL && myPlayer->getTileCollision()) {
 				Tile* tile = dynamic_cast<Tile*>(m_ppDisplayableObjects[i]);
 				tile->setTileYSpeed(0.2);
 				score += 1;
 			}
+
 			if ( m_iDrawableObjectsChanged )
 				return; // Abort! Something changed in the array
 		}
-		MyBall* myBall = dynamic_cast<MyBall*>(m_ppDisplayableObjects[0]);
-		myBall->setTileCollision(false);
+		MyPlayer* myPlayer = dynamic_cast<MyPlayer*>(m_ppDisplayableObjects[0]);
+		myPlayer->setTileCollision(false);
 
 	}
 

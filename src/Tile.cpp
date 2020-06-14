@@ -100,6 +100,11 @@ void Tile::DoUpdate( int iCurrentTime )
         //m_dY = (initialY / 2);
         m_dY = getNewYLocation();
         
+        // Set tile to move horizontally at random times.
+        if (rand() % 4 == 0) {
+            m_dSX = 0.2;
+        }
+
         setTileYSpeed(0.1);
         // Select x out of available x locations to avoid clashes.
         m_dX = getNewXLocation();

@@ -2,16 +2,20 @@
 #include "templates.h"
 #include "EnemyTile.h"
 
-EnemyTile::EnemyTile(BaseEngine* pEngine, int initialX, int initialY, Virus* virus) 
-: Tile(pEngine, initialX, initialY), reset(false), virus(virus), virusReleased(true)
+EnemyTile::EnemyTile(BaseEngine* pEngine, int tileX, int tileY, Virus* virus) 
+: Tile(pEngine, tileX, tileY), reset(false), virus(virus), virusReleased(true)
 {
     // Load tile image.
     tileImage = new ImageSurface();
     tileImage->LoadImage("enemy_tile.png");
-    
+
+    // Saving original coordinates
+    initialX = tileX;
+    initialY = tileY;
+
     // Current nd previous coordinates for the object - set them the same initially
-    m_iCurrentScreenX = m_iPreviousScreenX = initialX;
-    m_iCurrentScreenY = m_iPreviousScreenY = initialY;
+    m_iCurrentScreenX = m_iPreviousScreenX = tileX;
+    m_iCurrentScreenY = m_iPreviousScreenY = tileY;
 
     // The object coordinate will be the top left of the object
     m_iStartDrawPosX = 0;
@@ -81,8 +85,13 @@ void EnemyTile::DoUpdate( int iCurrentTime )
     if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
     {
         reset = true;
-        m_dY = -20;
-        m_dX = rand() % (BASE_SCREEN_WIDTH - m_iDrawWidth);
+        //m_dY = (initialY / 2);
+        m_dY = getNewYLocation();
+
+        // Get it slowly moving.
+        setTileYSpeed(0.1);
+        // Select x out of available x locations to avoid clashes.
+        m_dX = getNewXLocation();
         // Reset the virus release flag.
         virusReleased = false;
     }

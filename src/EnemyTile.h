@@ -7,7 +7,7 @@
 class EnemyTile : public Tile
 {
     public:
-        EnemyTile(BaseEngine* pEngine, int initialX, int initialY, Virus* virus);
+        EnemyTile(BaseEngine* pEngine, int tileX, int tileY, Virus* virus);
         virtual ~EnemyTile();
         void DoUpdate(int currentTime);
         double getXPosition() { return m_dX; }

@@ -5,16 +5,21 @@
 
 
 
-Tile::Tile(BaseEngine* pEngine, int initialX, int initialY) : DisplayableObject(pEngine)
+Tile::Tile(BaseEngine* pEngine, int tileX, int tileY)
+: DisplayableObject(pEngine)
 {
 
     // Load tile image.
     tileImage = new ImageSurface();
     tileImage->LoadImage("tile.png");
 
+    // Saving original coordinates
+    initialX = tileX;
+    initialY = tileY;
+
     // Current and previous coordinates for the object - set them the same initially
-    m_iCurrentScreenX = m_iPreviousScreenX = initialX;
-    m_iCurrentScreenY = m_iPreviousScreenY = initialY;
+    m_iCurrentScreenX = m_iPreviousScreenX = tileX;
+    m_iCurrentScreenY = m_iPreviousScreenY = tileY;
 
     // The object coordinate will be the top left of the object
     m_iStartDrawPosX = 0;
@@ -92,8 +97,12 @@ void Tile::DoUpdate( int iCurrentTime )
     // Bottom, here we set random tile's x position.
     if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
     {
-        m_dY = -20;
-        m_dX = rand() % (BASE_SCREEN_WIDTH - m_iDrawWidth);
+        //m_dY = (initialY / 2);
+        m_dY = getNewYLocation();
+        
+        setTileYSpeed(0.1);
+        // Select x out of available x locations to avoid clashes.
+        m_dX = getNewXLocation();
     }
 
     // Set current position - you NEED to set the current positions
@@ -105,10 +114,42 @@ void Tile::DoUpdate( int iCurrentTime )
 }
 
 
+// Select x out of available x locations to avoid clashes.
+int Tile::getNewXLocation() {
+    int newX = 0;
+    if(!xTileLocations.empty()) {
+        newX = xTileLocations.back();
+        xTileLocations.pop_back();
+    } else {
+        for (int x : xTileLocationsInitial)
+            xTileLocations.push_back(x);
+        newX = xTileLocations.back();
+        xTileLocations.pop_back();
+    }
+    return newX;
+}
+
+
+// Select y out of available y locations to avoid clashes.
+int Tile::getNewYLocation() {
+    int newY = 0;
+    if(!yTileLocations.empty()) {
+        newY = yTileLocations.back();
+        yTileLocations.pop_back();
+    } else {
+        for (int y : yTileLocationsInitial)
+            yTileLocations.push_back(y);
+        newY = yTileLocations.back();
+        yTileLocations.pop_back();
+    }
+    return newY;
+}
+
+
 /*
     Used to change tile's speed after player bounces off the tile.
 */
 void Tile::setTileYSpeed(double ySpeed) {
     m_dSY = ySpeed;
-    printf("setTileYSpeeed, m_dSY: %.2f\n", m_dSY);
+    //printf("setTileYSpeeed, m_dSY: %.2f\n", m_dSY);
 }

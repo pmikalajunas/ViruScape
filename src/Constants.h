@@ -4,6 +4,10 @@
 // Distance from where virus spreads.
 #define SPREADING_DISTANCE 40
 
+// Number of tiles displayed on the screen (including EnemyTile)
+#define NUMBER_OF_TILES 5
+
+
 #define NW 100
 #define SE 101
 #define SW 102

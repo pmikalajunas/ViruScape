@@ -16,8 +16,19 @@
 #include "Virus.h"
 #include "MyPlayer.h"
 #include <iostream>
+#include "Constants.h"
+#include <vector>
 
 using namespace std; 
+
+
+// Initialize tile x locations
+vector<int> Tile::xTileLocations = {100, 200, 300, 400, 500};
+vector<int> Tile::xTileLocationsInitial(xTileLocations.begin(), xTileLocations.end()); 
+
+// Initialize tile y locations
+vector<int> Tile::yTileLocations = {50, 100, 150, 200};
+vector<int> Tile::yTileLocationsInitial(yTileLocations.begin(), yTileLocations.end()); 
 
 
 MyProjectMain::MyProjectMain(void) : BaseEngine( 50 ), 
@@ -65,17 +76,21 @@ int MyProjectMain::InitialiseObjects()
 	// Create an array one element larger than the number of objects that you want.
 	m_ppDisplayableObjects = new DisplayableObject*[8];
 
-	// You MUST set the array entry after the last one that you create to NULL, so that ,the system knows when to stop.
-	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
+	// List of available x locations for tiles.
+	vector<int> xLocations = Tile::xTileLocationsInitial;
+
 	MyPlayer* player = new MyPlayer(this);
 	Virus* virus =  new Virus(this, player);
-	EnemyTile* enemyTile = new EnemyTile(this, 100, 300, virus);
+	EnemyTile* enemyTile = new EnemyTile(this, xLocations[0], 300, virus);
+
+	// You MUST set the array entry after the last one that you create to NULL, so that ,the system knows when to stop.
+	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
 	m_ppDisplayableObjects[0] = player;
 	m_ppDisplayableObjects[1] = enemyTile;
-	m_ppDisplayableObjects[2] = new Tile(this, 500, 500);
-	m_ppDisplayableObjects[3] = new Tile(this, 400, 350);
-	m_ppDisplayableObjects[4] = new Tile(this, 500, 200);
-	m_ppDisplayableObjects[5] = new Tile(this, 250, 400);
+	m_ppDisplayableObjects[2] = new Tile(this, xLocations[1], 500);
+	m_ppDisplayableObjects[3] = new Tile(this, xLocations[2], 350);
+	m_ppDisplayableObjects[4] = new Tile(this, xLocations[3], 200);
+	m_ppDisplayableObjects[5] = new Tile(this, xLocations[4], 400);
 	m_ppDisplayableObjects[6] = virus;
 	m_ppDisplayableObjects[7] = NULL;
 
@@ -254,6 +269,10 @@ void MyProjectMain::KeyDown(int iKeyCode)
 
 
 void::MyProjectMain::resetGame() {
+
+	// Restore x and y coordinates.
+	// Tile::xTileLocations = Tile::xTileLocationsInitial;
+	// copy(vect1.begin(), vect1.end(), back_inserter(vect2)); 
 
 	reader = new FileReader();
 	InitialiseObjects();

@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592055504 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592109292 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -405,6 +405,8 @@
 	"Virus.h"
 	"MyPlayer.h"
 	<iostream>
+	"Constants.h"
+	<vector>
 
 1591975000 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
 	"BaseEngine.h"
@@ -416,11 +418,12 @@
 	"BaseEngine.h"
 	"TileManager.h"
 
-1592034655 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+1592109007 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
 	"DisplayableObject.h"
 	"JPGImage.h"
+	<vector>
 
-1592053008 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1592109499 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
@@ -443,12 +446,12 @@
 1591976263 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.h
 	<unordered_map>
 
-1592065985 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
+1592109482 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
 	"header.h"
 	"templates.h"
 	"EnemyTile.h"
 
-1592065900 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
+1592106369 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.h
 	"Tile.h"
 	"Virus.h"
 
@@ -459,7 +462,7 @@
 	<string>
 	"Constants.h"
 
-1592066000 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
+1592066468 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
 	"header.h"
 	"templates.h"
 	"Virus.h"
@@ -470,7 +473,7 @@
 	"JPGImage.h"
 	"Constants.h"
 
-1592065380 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592068923 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
@@ -478,5 +481,5 @@
 	"Virus.h"
 	"Constants.h"
 
-1592065272 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592101666 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 

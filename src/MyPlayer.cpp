@@ -125,7 +125,7 @@ void MyPlayer::DoUpdate(int currentTime)
                 touchedTile = true;
                 m_dSY *= -tileBounce;
                 m_dY -= 5;
-                printf("Collision distX: %.2f distY: %.2f\n", distanceXToObject, distanceYToObject);
+                //printf("Collision distX: %.2f distY: %.2f\n", distanceXToObject, distanceYToObject);
             }
         }
     }

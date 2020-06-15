@@ -1,7 +1,7 @@
 #ifndef VIRUS_H
 #define VIRUS_H
 
-#include <DisplayableObject.h>
+#include "DisplayableObject.h"
 #include "JPGImage.h"
 #include "MyPlayer.h"
 #include <string>

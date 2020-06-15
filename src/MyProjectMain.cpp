@@ -18,6 +18,7 @@
 #include <iostream>
 #include "Constants.h"
 #include <vector>
+#include "ParallaxBg.h"
 
 using namespace std; 
 
@@ -27,7 +28,7 @@ vector<int> Tile::xTileLocations = {100, 200, 300, 400, 500};
 vector<int> Tile::xTileLocationsInitial(xTileLocations.begin(), xTileLocations.end()); 
 
 // Initialize tile y locations
-vector<int> Tile::yTileLocations = {50, 100, 150, 200};
+vector<int> Tile::yTileLocations = {20, 40, 60, 80};
 vector<int> Tile::yTileLocationsInitial(yTileLocations.begin(), yTileLocations.end()); 
 
 
@@ -51,12 +52,15 @@ Basically do the drawing of the background in here and it'll be copied to the sc
 */
 void MyProjectMain::SetupBackgroundBuffer()
 {
-	FillBackground( 0xffffff );
+	//FillBackground( 0xffffff );
 
-	// Draw the background.
-	ImageData im;
-	im.LoadImage( "bg.png" );
-	im.RenderImageWithMask(this->GetBackground(), 0, 0, 0, 0, im.GetWidth(), im.GetHeight());
+	// Draw the static background for initial and end states.
+	if(m_state == stateInit || m_state == endGame) {
+		ImageData im;
+		im.LoadImage( "bg.png" );
+		im.RenderImageWithMask(this->GetBackground(), 0, 0, 0, 0, im.GetWidth(), im.GetHeight());
+	}
+
 
 	// Draw virus on the main screen as a logo.
 	if(m_state == stateInit) {
@@ -99,7 +103,7 @@ int MyProjectMain::InitialiseObjects()
 	DestroyOldObjects();
 
 	// Create an array one element larger than the number of objects that you want.
-	m_ppDisplayableObjects = new DisplayableObject*[8];
+	m_ppDisplayableObjects = new DisplayableObject*[9];
 
 	// List of available x locations for tiles.
 	vector<int> xLocations = Tile::xTileLocationsInitial;
@@ -117,7 +121,10 @@ int MyProjectMain::InitialiseObjects()
 	m_ppDisplayableObjects[4] = new Tile(this, xLocations[3], 200);
 	m_ppDisplayableObjects[5] = new Tile(this, xLocations[4], 400);
 	m_ppDisplayableObjects[6] = virus;
-	m_ppDisplayableObjects[7] = NULL;
+	m_ppDisplayableObjects[7] = new ParallaxBg(this, 0);
+	// Another background will take over the first, creating infinite sky illusion.
+	m_ppDisplayableObjects[8] = new ParallaxBg(this, - BASE_SCREEN_HEIGHT);
+	m_ppDisplayableObjects[9] = NULL;
 
 	return 0;
 }
@@ -182,7 +189,7 @@ void MyProjectMain::GameAction()
 		return;
 
 	// Don't act for another 10 ticks
-	SetTimeToAct( 1 );
+	SetTimeToAct( 5 );
 
 	// NEW SWITCH
 	switch( m_state )
@@ -206,6 +213,7 @@ void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 	{
 		for ( int i = 0 ; m_ppDisplayableObjects[i] != NULL ; i++ )
 		{
+
 			m_ppDisplayableObjects[i]->DoUpdate(iCurrentTime);
 			MyPlayer* myPlayer = dynamic_cast<MyPlayer*>(m_ppDisplayableObjects[0]);
 			// End the game if ball touched the ground.
@@ -324,8 +332,12 @@ void MyProjectMain::DrawChanges()
 */
 void MyProjectMain::DrawScreen()
 {
-	// First draw the background
-	CopyAllBackgroundBuffer();
+
+	// Prevent from drawing background in main state, we have moving bg.
+	if (m_state != stateMain) {
+		CopyAllBackgroundBuffer();
+	}
+	
 	// And finally, draw the text
 	DrawStrings();
 

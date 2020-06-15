@@ -4,6 +4,7 @@
 #include "MyPlayer.h"
 #include "Virus.h"
 #include "Constants.h"
+#include "ParallaxBg.h"
 
 MyPlayer::MyPlayer(BaseEngine* pEngine) : DisplayableObject(pEngine),
 m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
@@ -114,6 +115,11 @@ void MyPlayer::UpdateInteractingObjects() {
     {
         if ( pObject == this ) // This is us, skip it
             continue;
+
+        // Ignore background object.
+        if(dynamic_cast<ParallaxBg*>(pObject) != NULL) {
+            continue;
+        }
 
         double distance = calculatePlayersDistanceToObject(pObject);
         int radius = height / 2;

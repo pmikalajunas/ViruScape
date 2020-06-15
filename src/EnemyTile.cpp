@@ -21,7 +21,6 @@ EnemyTile::EnemyTile(BaseEngine* pEngine, int tileX, int tileY, Virus* virus)
     m_iStartDrawPosX = 0;
     m_iStartDrawPosY = 0;
 
-    // Record the ball size as both height and width
     m_iDrawWidth = tileImage->GetWidth();
     m_iDrawHeight = tileImage->GetHeight();
 
@@ -40,6 +39,11 @@ EnemyTile::~EnemyTile()
 }
 
 
+/*
+    Updates tile's position based on its speed.
+    Releases the virus once tile reaches certain point.
+    Prevents tile from going off the bounds.
+*/
 void EnemyTile::DoUpdate( int iCurrentTime )
 {
 
@@ -53,7 +57,6 @@ void EnemyTile::DoUpdate( int iCurrentTime )
     // Change tile position on their current speed.
     m_dX += m_dSX;
     m_dY += m_dSY;
-
 
     // Release the virus if it haven's been released ...
     // and tile reached 100 pixels

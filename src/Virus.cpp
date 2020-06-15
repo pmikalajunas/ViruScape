@@ -38,6 +38,9 @@ Virus::~Virus()
     //dtor
 }
 
+/*
+    Draws virus on the screen. (If it's visible)
+*/
 void Virus::Draw() {
     // Hide virus when enemy is not shooting it.
     if (!IsVisible()) {
@@ -92,8 +95,10 @@ void Virus::setPlayerPositionToVirus() {
 
 }
 
+/*
+    Sets virus visible, shoots it from opponent's location.
+*/
 void Virus::FollowPlayer(double enemyX, double enemyY) {
-
 
     setPlayerPositionToVirus();
 
@@ -103,6 +108,10 @@ void Virus::FollowPlayer(double enemyX, double enemyY) {
     SetVisible(true);
 }
 
+/*
+    Makes virus to move towards initial player's location.
+    Hides virus once it goes over boundaries of the screen.
+*/
 void Virus::DoUpdate( int iCurrentTime ) {
 
     if(!IsVisible()) {

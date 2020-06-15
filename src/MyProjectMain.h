@@ -4,6 +4,7 @@
 #include "BaseEngine.h"
 #include "FileReader.h"
 #include <unordered_map>
+#include "JPGImage.h"
 
 using namespace std;
 
@@ -48,8 +49,10 @@ public:
 	enum State { stateInit, stateMain, statePaused, endGame };
 
 private:
-
 	FileReader* reader;
+	// Virus image drawn on the main screen.
+	ImageSurface* init_virus;
+	ImageSurface* trophy_image;
 
 	State m_state;
 	int score;

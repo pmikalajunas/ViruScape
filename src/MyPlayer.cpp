@@ -27,12 +27,14 @@ m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
     m_iDrawWidth = frogImage->GetWidth();
     m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
 
-    // Speed.
+    // Initially player slowly goes down, gravity boosts the process.
     m_dSY = 0.2;
 
+    // Gravity is added to the player's speed, to create falling effect.
     gravity = 0.0019;
-    friction = 0.98;
-    bounce = 1;
+    // Bounce to the walls slows the player.
+    bounce = 0.95;
+    // Bounce off the tile increases player's speed.
     tileBounce = 1.1;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
@@ -47,6 +49,9 @@ MyPlayer::~MyPlayer()
     //dtor
 }
 
+/*
+    Draws player on the screen.
+*/
 void MyPlayer::Draw(void)
 {
 
@@ -61,11 +66,10 @@ void MyPlayer::Draw(void)
     StoreLastScreenPositionAndUpdateRect();
 }
 
-double MyPlayer::GetYSpeed() {
-    return m_dSY;
-}
 
-
+/*
+    Calculates distance from player to the given object.
+*/
 double MyPlayer::calculatePlayersDistanceToObject(DisplayableObject* pObject) {
 
     int testX = m_dX;
@@ -99,9 +103,11 @@ double MyPlayer::calculatePlayersDistanceToObject(DisplayableObject* pObject) {
     return sqrt( (distanceXToObject*distanceXToObject) + (distanceYToObject*distanceYToObject) );
 }
 
-
-void MyPlayer::DoUpdate(int currentTime)
-{
+/*
+    Checks if player cought the virus.
+    Checks if player touched the tile from above.
+*/
+void MyPlayer::UpdateInteractingObjects() {
 
     DisplayableObject* pObject;
     for (int iObjectId = 0; (pObject = m_pMainEngine->GetDisplayableObject(iObjectId)) != NULL; iObjectId++)
@@ -114,7 +120,6 @@ void MyPlayer::DoUpdate(int currentTime)
 
         // If the virus hits us, we are done.
         if (distance < SPREADING_DISTANCE && dynamic_cast<Virus*>(pObject) != NULL) {
-            printf("Touched virus\n");
             touchedGround = true;
             return;
         }
@@ -125,81 +130,72 @@ void MyPlayer::DoUpdate(int currentTime)
                 touchedTile = true;
                 m_dSY *= -tileBounce;
                 m_dY -= 5;
-                //printf("Collision distX: %.2f distY: %.2f\n", distanceXToObject, distanceYToObject);
             }
         }
     }
+}
 
+/*
+    Updates player's location based on speed.
+    Checks if player clashed with any other objects.
+    Moves player depending on key presses.
+    Prevents player from crossing screen boundaries.
+*/
+void MyPlayer::DoUpdate(int currentTime)
+{
 
-    if(m_dSY > 1){
+    UpdateInteractingObjects();
+
+    // Prevent player from going to fast either direction.
+    if(m_dSY > 1)
         m_dSY = 1;
-    }
-
-    if(m_dSX > 0.6){
+    if(m_dSX > 0.6)
         m_dSX = 0.6;
-    }
 
 
-	if ( GetEngine()->IsKeyPressed( SDLK_UP ) )
-		//m_dSY -= 0.01;
-        m_dY -= 0.2;
-	if ( GetEngine()->IsKeyPressed( SDLK_DOWN ) )
-	    //m_dSY += 0.01;
-        m_dY += 0.2;
+    // Player can be navigated left and right with arrow keys.
 	if ( GetEngine()->IsKeyPressed( SDLK_LEFT ) )
-		//m_dSX -= 0.003;
         m_dX -= 0.4;
 	if ( GetEngine()->IsKeyPressed( SDLK_RIGHT ) )
-		//m_dSX += 0.003;
         m_dX += 0.4;
-	if ( GetEngine()->IsKeyPressed( SDLK_SPACE ) )
-		m_dSX = m_dSY = 0;
 
+    // Change location based on the current speed.
 	m_dX += m_dSX;
 	m_dY += m_dSY;
 
-    // Ball went over left bound.
+    // Player touched left side of the screen, bounce player back.
 	if ( (m_dX  +m_iStartDrawPosX) < 0 )
 	{
-        printf("Ball - left bound.\n");
 		m_dX = - m_iStartDrawPosX;
 		if ( m_dSX < 0 )
 			m_dSX *= -bounce;
 	}
 
-    // Ball went over right bound.
+    // Player touched right side of the screen, bounce player back.
 	if ( (m_dX+m_iStartDrawPosX+m_iDrawWidth) > (GetEngine()->GetScreenWidth()-1) )
 	{
-        printf("Ball - right bound.\n");
 		m_dX = GetEngine()->GetScreenWidth() -1 - m_iStartDrawPosX - m_iDrawWidth;
 		if ( m_dSX > 0 )
 			m_dSX *= -bounce;
 	}
 
-    // Ball went over top bound.
+    // Player touched top of the screen, bounce player back.
 	if ( (m_dY+m_iStartDrawPosY) < 0 )
 	{
-        printf("Ball - top bound.\n");
 		m_dY = -m_iStartDrawPosY;
 		if ( m_dSY < 0 )
 			m_dSY *= -bounce;
-            m_dSX *= friction;
-
 	}
 
-    // Ball went over bottom bound.
+    // Player touched the ground, end the game.
 	if ((m_dY + m_iStartDrawPosY + m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
 	{
-        printf("Ball - bottom bound.\n");
 		m_dY = GetEngine()->GetScreenHeight() -1 - m_iStartDrawPosY - m_iDrawHeight;
 		touchedGround = true;
-
 	}
 
-    // add gravity
+    // Add gravity to make player go down slowly.
     m_dSY += gravity;
-    //printf("m_dSY: %f m_dSX: %f\n", m_dSY, m_dSX);
-    //printf("m_dY: %f m_dX: %f\n", m_dY, m_dX);
 
 	// Work out current position
 	m_iCurrentScreenX = (int)(m_dX+0.5);
@@ -207,18 +203,12 @@ void MyPlayer::DoUpdate(int currentTime)
 
 	// Ensure that the object gets redrawn on the display, if something changed
 	RedrawObjects();
-
 }
 
-
-bool MyPlayer::getTileCollision(){
-    return touchedTile;
-}
-
-void MyPlayer::setTileCollision(bool tileCollision) {
-    touchedTile = tileCollision;
-}
-
+/*
+    If touchedGround is true, sets it false, returns true.
+    Otherwise, returns false.
+*/
 bool MyPlayer::getTouchedGround(){
     if (touchedGround) {
         touchedGround = false;

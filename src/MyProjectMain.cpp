@@ -58,6 +58,31 @@ void MyProjectMain::SetupBackgroundBuffer()
 	im.LoadImage( "bg.png" );
 	im.RenderImageWithMask(this->GetBackground(), 0, 0, 0, 0, im.GetWidth(), im.GetHeight());
 
+	// Draw virus on the main screen as a logo.
+	if(m_state == stateInit) {
+		init_virus = new ImageSurface();
+
+		init_virus->LoadImage("virus_main.png");
+		init_virus->RenderImage(
+			GetBackground(),
+			0, 0, 540, 30,
+			init_virus->GetWidth(), init_virus->GetHeight()
+		);
+	}
+ 
+	// Draw trophy next to leaderboard title.
+	if(m_state == endGame) {
+		trophy_image = new ImageSurface();
+
+		trophy_image->LoadImage("trophy.png");
+		trophy_image->RenderImage(
+			GetBackground(),
+			0, 0, 674, 50,
+			trophy_image->GetWidth(), trophy_image->GetHeight()
+		);
+	}
+
+
 }
 
 
@@ -101,7 +126,7 @@ int MyProjectMain::InitialiseObjects()
 void MyProjectMain::intialiseFonts(){
 	smallFont = GetFont("neuropol x rg.ttf", 16);
 	mediumFont = GetFont("neuropol x rg.ttf", 20);
-	largeFont = GetFont("neuropol x rg.ttf", 48);
+	largeFont = GetFont("neuropol x rg.ttf", 52);
 }
 
 
@@ -113,11 +138,11 @@ void MyProjectMain::DrawStrings()
 	{
 		case stateInit:
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
-			DrawScreenString( 169, 30, "BouncyBall", 0x0, largeFont );
-			DrawScreenString( 169, 280, "Initialised and waiting for SPACE", 0x0, mediumFont );
+			DrawScreenString( 169, 30, "ViruScape", 0x0, largeFont );
 			char buf[128];
-			sprintf( buf, "Playing as: %s", reader->getPlayer().c_str());
-			DrawScreenString( 169, 300, buf, 0x0, mediumFont );
+			sprintf( buf, "Playing as %s", reader->getPlayer().c_str());
+			DrawScreenString( 174, 93, buf, 0x0, mediumFont );
+			DrawScreenString( 169, 280, "Start game by pressing SPACE", 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			break;
 		case stateMain:
@@ -133,7 +158,7 @@ void MyProjectMain::DrawStrings()
 			break;
 		case endGame:
 			CopyBackgroundPixels( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
-			DrawScreenString( 150, 50, "LEADERBOARD", 0x0, largeFont );
+			DrawScreenString( 110, 50, "LEADERBOARD", 0x0, largeFont );
 			unordered_map<string, int> scores = reader->getScores();
 			int y = 120;
 			for (auto& x : scores){
@@ -215,8 +240,8 @@ void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 
 
 /*
-Handle any key presses here.
-Note that the objects themselves (e.g. player) may also check whether a key is currently pressed
+	Handle any key presses here.
+	Note that the objects themselves (e.g. player) may also check whether a key is currently pressed
 */
 void MyProjectMain::KeyDown(int iKeyCode)
 {
@@ -237,14 +262,14 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				// Redraw the whole screen now
 				Redraw(true);
 				break;
-			// case stateMain:
-			// 	// Go to state paused
-			// 	m_state = statePaused;
-			// 	// Force redraw of background
-			// 	SetupBackgroundBuffer();
-			// 	// Redraw the whole screen now
-			// 	Redraw(true);
-			// 	break;
+			case stateMain:
+				// Go to state paused
+				m_state = statePaused;
+				// Force redraw of background
+				SetupBackgroundBuffer();
+				// Redraw the whole screen now
+				Redraw(true);
+				break;
 			case statePaused:
 				// Go to state main
 				m_state = stateMain;
@@ -264,29 +289,25 @@ void MyProjectMain::KeyDown(int iKeyCode)
 			} // End switch on current state
 			break;
 	}
-
 }
 
-
+/*
+	Resets the game after player have lost.
+*/
 void::MyProjectMain::resetGame() {
-
-	// Restore x and y coordinates.
-	// Tile::xTileLocations = Tile::xTileLocationsInitial;
-	// copy(vect1.begin(), vect1.end(), back_inserter(vect2)); 
-
 	reader = new FileReader();
 	InitialiseObjects();
 	score = 0;
-	printf("Resetting the game...\n");
 }
 
 
-/* Draw the changes to the screen.
-Remove the changing objects, redraw the strings and draw the changing objects again.
- */
+/* 
+	Draw the changes to the screen.
+	Remove the changing objects, redraw the strings and draw the changing objects again.
+*/
 void MyProjectMain::DrawChanges()
 {
-	// NEW IF
+	// Don't update objects if we are in either starting or finishing state.
 	if ( m_state == stateInit || m_state == endGame )
 		return; // Do not draw objects if initialising
 
@@ -298,18 +319,19 @@ void MyProjectMain::DrawChanges()
 	DrawChangingObjects();
 }
 
-/* Draw the screen - copy the background buffer, then draw the text and objects. */
+/* 	
+	Draw the screen - copy the background buffer, then draw the text and objects. 
+*/
 void MyProjectMain::DrawScreen()
 {
 	// First draw the background
-	//this->CopyBackgroundPixels( 100, 100, 100, 100 );
 	CopyAllBackgroundBuffer();
 	// And finally, draw the text
 	DrawStrings();
 
-	// NEW IF
+	// Don't draw objects if we are in either starting or finishing state.
 	if ( m_state == stateInit || m_state == endGame )
-		return; // Do not draw objects if initialising
+		return; 
 
 	// Then draw the changing objects
 	DrawChangingObjects();

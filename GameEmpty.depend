@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592126238 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592153914 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -408,10 +408,11 @@
 	"Constants.h"
 	<vector>
 
-1591975000 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
+1592143507 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
 	"BaseEngine.h"
 	"FileReader.h"
 	<unordered_map>
+	"JPGImage.h"
 
 1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tilemanager.cpp
 	"header.h"
@@ -423,7 +424,7 @@
 	"JPGImage.h"
 	<vector>
 
-1592109499 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1592139451 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
@@ -439,14 +440,15 @@
 	"DisplayableObject.h"
 	"JPGImage.h"
 
-1591976260 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.cpp
+1592155237 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.cpp
 	<fstream>
 	"FileReader.h"
 
-1591976263 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.h
+1592154824 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\filereader.h
 	<unordered_map>
+	"Constants.h"
 
-1592109482 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
+1592154647 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
 	"header.h"
 	"templates.h"
 	"EnemyTile.h"
@@ -462,18 +464,18 @@
 	<string>
 	"Constants.h"
 
-1592066468 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
+1592154310 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
 	"header.h"
 	"templates.h"
 	"Virus.h"
 	"Constants.h"
 
-1592064073 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+1592152509 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	"Constants.h"
 
-1592068923 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592152419 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
@@ -481,5 +483,5 @@
 	"Virus.h"
 	"Constants.h"
 
-1592101666 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592154828 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 

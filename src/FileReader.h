@@ -2,11 +2,9 @@
 #define FILEREADER_H
 
 #include <unordered_map>
+#include "Constants.h"
 
 using namespace std;
-
-#define SCORES_FILE "scores.txt"
-#define PLAYER_FILE "player.txt"
 
 class FileReader
 {

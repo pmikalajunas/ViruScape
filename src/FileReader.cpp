@@ -11,10 +11,12 @@ FileReader::FileReader()
 
 FileReader::~FileReader()
 {
-    //dtor
 }
 
-
+/*
+    Reads scores from a file.
+    Stores them in unordered map.
+*/
 void FileReader::readScores() {
 
     ifstream infile(SCORES_FILE);
@@ -30,6 +32,9 @@ void FileReader::readScores() {
     }
 }
 
+/*
+    Reads and stores player's name.
+*/
 void FileReader::readPlayer() {
     ifstream infile(PLAYER_FILE);
     if (!infile.good()) {
@@ -39,6 +44,9 @@ void FileReader::readPlayer() {
     infile >> player;
 }
 
+/*
+    Writes all the scores from the map to the file.
+*/
 void FileReader::writeScores() {
 
     ofstream file;
@@ -52,6 +60,10 @@ void FileReader::writeScores() {
 }
 
 
+/*
+    Adds the score if player does not exist.
+    Updates the score if player performed better.
+*/
 void FileReader::addScore(int score) {
     // Add score if player does not exist.
     if (scores.find(player) == scores.end())

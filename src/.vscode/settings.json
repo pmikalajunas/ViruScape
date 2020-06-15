@@ -10,6 +10,7 @@
         "unordered_map": "cpp",
         "list": "cpp",
         "vector": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "xiosbase": "cpp"
     }
 }

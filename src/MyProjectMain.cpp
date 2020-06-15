@@ -65,6 +65,30 @@ void MyProjectMain::SetupBackgroundBuffer()
 	// Draw virus on the main screen as a logo.
 	if(m_state == stateInit) {
 		init_virus = new ImageSurface();
+		virtual_guy_big = new ImageSurface();
+		frog_big = new ImageSurface();
+		pink_man_big = new ImageSurface();
+	
+		virtual_guy_big->LoadImage("virtual_guy_big.png");
+		virtual_guy_big->RenderImage(
+			GetBackground(),
+			0, 0, 190, 220,
+			virtual_guy_big->GetWidth(), virtual_guy_big->GetHeight()
+		);
+
+		frog_big->LoadImage("frog_big.png");
+		frog_big->RenderImage(
+			GetBackground(),
+			0, 0, 340, 220,
+			frog_big->GetWidth(), frog_big->GetHeight()
+		);
+
+		pink_man_big->LoadImage("pink_man_big.png");
+		pink_man_big->RenderImage(
+			GetBackground(),
+			0, 0, 490, 220,
+			pink_man_big->GetWidth(), pink_man_big->GetHeight()
+		);
 
 		init_virus->LoadImage("virus_main.png");
 		init_virus->RenderImage(

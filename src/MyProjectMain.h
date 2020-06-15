@@ -53,6 +53,9 @@ private:
 	// Virus image drawn on the main screen.
 	ImageSurface* init_virus;
 	ImageSurface* trophy_image;
+	ImageSurface* virtual_guy_big;
+	ImageSurface* frog_big;
+	ImageSurface* pink_man_big;
 
 	State m_state;
 	int score;

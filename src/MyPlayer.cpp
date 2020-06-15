@@ -9,12 +9,16 @@
 
 MyPlayer::MyPlayer(BaseEngine* pEngine, TileAnti* tile) : DisplayableObject(pEngine),
 m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false),
-collectedSanitizer(false), sanitized(false), sanitizerTile(tile)
+collectedSanitizer(false), sanitized(false), sanitizerTile(tile), sanitizedTime(0)
 {
 
     // Load frog image.
     frogImage = new ImageSurface();
     frogImage->LoadImage("frog.png");
+
+    // Load shielded frog image.
+    frogShielded = new ImageSurface();
+    frogShielded->LoadImage("frog_shielded.png");
 
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = PLAYER_INITIAL_X;
@@ -25,7 +29,6 @@ collectedSanitizer(false), sanitized(false), sanitizerTile(tile)
     // Draw position is object's left upper corner.
     m_iStartDrawPosX = m_iStartDrawPosY = 0;
 
-    // Record the ball size as both height and width.
     m_iDrawWidth = frogImage->GetWidth();
     m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
 
@@ -56,10 +59,24 @@ MyPlayer::~MyPlayer()
 void MyPlayer::Draw(void)
 {
 
-    frogImage->RenderImage(GetEngine()->GetForeground(),
-    0, 0,
-    m_iCurrentScreenX, m_iCurrentScreenY,
-    frogImage->GetWidth(), frogImage->GetHeight());
+    // Draw a shield over a frog if its sanitized.
+    if(!sanitized) {
+        m_iDrawWidth = frogImage->GetWidth();
+        m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
+        frogImage->RenderImage(GetEngine()->GetForeground(),
+            0, 0,
+            m_iCurrentScreenX, m_iCurrentScreenY,
+            frogImage->GetWidth(), frogImage->GetHeight());
+    } else {
+        m_iDrawWidth = frogShielded->GetWidth();
+        m_iDrawHeight = frogShielded->GetHeight() + IMAGE_HEIGHT_OFFSET;
+        frogShielded->RenderImage(GetEngine()->GetForeground(),
+            0, 0,
+            m_iCurrentScreenX, m_iCurrentScreenY,
+            frogShielded->GetWidth(), frogShielded->GetHeight());
+    }
+
+
 
     // This will store the position at which the object was drawn
     // so that the background can be drawn over the top.
@@ -135,13 +152,15 @@ void MyPlayer::UpdateInteractingObjects() {
             return;
         }
 
-        // If the ball is slightly above the tile, we bounce it up
+        // If the player is slightly above the tile, we bounce it up
         if ( distance <= (radius + 5) && distance >= radius) {
             if (distanceYToObject < 0) {
                 // Check if we have collected hand sanitizer.
                 if (dynamic_cast<TileAnti*>(pObject) != NULL) {
                     collectedSanitizer = true;
                     sanitized = true;
+                    // Record the time when frog has been sanitized.
+                    sanitizedTime = GetEngine()->GetTime();
                     sanitizerTile->setEnabled(false);
                 }
                 touchedTile = true;
@@ -160,6 +179,12 @@ void MyPlayer::UpdateInteractingObjects() {
 */
 void MyPlayer::DoUpdate(int currentTime)
 {
+
+    // Check if hand sanitizer expired.
+    if (currentTime - sanitizedTime > SANITIZATION_TICKS) {
+        sanitized = false;
+        sanitizedTime = 0;
+    }
 
     UpdateInteractingObjects();
 

@@ -85,3 +85,9 @@
 
 // When virus is released (y coordinate).
 #define VIRUS_RELEASE_Y 100
+
+
+// -------------------- HAND SANITIZER TILE ---------------------------
+
+// How long hand sanitizer protects the player.
+#define SANITIZATION_TICKS 5000

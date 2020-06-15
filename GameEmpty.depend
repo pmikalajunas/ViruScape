@@ -472,13 +472,13 @@
 	"Virus.h"
 	"Constants.h"
 
-1592214991 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+1592225210 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	"Constants.h"
 	"TileAnti.h"
 
-1592220754 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592225243 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
@@ -488,7 +488,7 @@
 	"ParallaxBg.h"
 	"TileAnti.h"
 
-1592211892 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592225162 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 
 1592207942 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\parallaxbg.cpp
 	"header.h"
@@ -500,7 +500,7 @@
 	"DisplayableObject.h"
 	"JPGImage.h"
 
-1592214733 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.cpp
+1592222930 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.cpp
 	"header.h"
 	"templates.h"
 	"TileAnti.h"

@@ -43,7 +43,9 @@ class MyPlayer : public DisplayableObject
         bool touchedGround;
         bool collectedSanitizer;
         bool sanitized;
+        int sanitizedTime;
         ImageSurface* frogImage;
+        ImageSurface* frogShielded;
         TileAnti* sanitizerTile;
 
 };

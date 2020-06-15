@@ -148,8 +148,16 @@ void MyPlayer::UpdateInteractingObjects() {
 
         // If the virus hits us, we are done.
         if (distance < SPREADING_DISTANCE && dynamic_cast<Virus*>(pObject) != NULL) {
-            touchedGround = true;
-            return;
+            // Hand sanitizer kills all the germs over here.
+            if(sanitized) {
+                Virus* virus = dynamic_cast<Virus*>(pObject);
+                virus->SetVisible(false);
+                
+            } else {
+                touchedGround = true;
+                return;
+            }
+
         }
 
         // If the player is slightly above the tile, we bounce it up

@@ -109,9 +109,11 @@ int MyProjectMain::InitialiseObjects()
 	// List of available x locations for tiles.
 	vector<int> xLocations = Tile::xTileLocationsInitial;
 
-	MyPlayer* player = new MyPlayer(this);
+	TileAnti* sanitizerTile = new TileAnti(this, xLocations[5], 250);
+	MyPlayer* player = new MyPlayer(this, sanitizerTile);
 	Virus* virus =  new Virus(this, player);
 	EnemyTile* enemyTile = new EnemyTile(this, xLocations[0], 300, virus);
+	
 
 	// You MUST set the array entry after the last one that you create to NULL, so that ,the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
@@ -125,7 +127,7 @@ int MyProjectMain::InitialiseObjects()
 	m_ppDisplayableObjects[7] = new ParallaxBg(this, 0);
 	// Another background will take over the first, creating infinite sky illusion.
 	m_ppDisplayableObjects[8] = new ParallaxBg(this, - BASE_SCREEN_HEIGHT);
-	m_ppDisplayableObjects[9] = new TileAnti(this, xLocations[5], 250);
+	m_ppDisplayableObjects[9] = sanitizerTile;
 	m_ppDisplayableObjects[10] = NULL;
 
 	return 0;

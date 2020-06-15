@@ -4,12 +4,13 @@
 #include "DisplayableObject.h"
 #include "JPGImage.h"
 #include "Constants.h"
+#include "TileAnti.h"
 
 
 class MyPlayer : public DisplayableObject
 {
     public:
-        MyPlayer(BaseEngine* pEngine);
+        MyPlayer(BaseEngine* pEngine, TileAnti* tile);
         virtual ~MyPlayer();
         
         void Draw(void);
@@ -24,9 +25,10 @@ class MyPlayer : public DisplayableObject
         bool getTileCollision(void) { return touchedTile; }
         void setTileCollision(bool tileCollision) { touchedTile = tileCollision; }
         bool getTouchedGround(void);
+        bool getCollectedSanitizer(void);
         
     private:
-        BaseEngine * m_pMainEngine;
+        BaseEngine* m_pMainEngine;
         double m_dSX;
         double m_dSY;
         double m_dX;
@@ -39,7 +41,11 @@ class MyPlayer : public DisplayableObject
         double tileBounce;
         bool touchedTile;
         bool touchedGround;
+        bool collectedSanitizer;
+        bool sanitized;
         ImageSurface* frogImage;
+        TileAnti* sanitizerTile;
+
 };
 
 #endif

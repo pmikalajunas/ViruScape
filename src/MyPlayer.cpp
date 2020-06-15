@@ -5,9 +5,11 @@
 #include "Virus.h"
 #include "Constants.h"
 #include "ParallaxBg.h"
+#include "TileAnti.h"
 
-MyPlayer::MyPlayer(BaseEngine* pEngine) : DisplayableObject(pEngine),
-m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
+MyPlayer::MyPlayer(BaseEngine* pEngine, TileAnti* tile) : DisplayableObject(pEngine),
+m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false),
+collectedSanitizer(false), sanitized(false), sanitizerTile(tile)
 {
 
     // Load frog image.
@@ -119,21 +121,29 @@ void MyPlayer::UpdateInteractingObjects() {
             continue;
         }
 
+        // Skip invisible objects.
+        if (!pObject->IsVisible()) {
+            continue;
+        }
+
         double distance = calculatePlayersDistanceToObject(pObject);
         int radius = height / 2;
 
         // If the virus hits us, we are done.
         if (distance < SPREADING_DISTANCE && dynamic_cast<Virus*>(pObject) != NULL) {
-            Virus* virus = dynamic_cast<Virus*>(pObject);
-            // Make sure that the virus is visible.
-            if (virus->IsVisible()) 
-                touchedGround = true;
+            touchedGround = true;
             return;
         }
 
         // If the ball is slightly above the tile, we bounce it up
         if ( distance <= (radius + 5) && distance >= radius) {
             if (distanceYToObject < 0) {
+                // Check if we have collected hand sanitizer.
+                if (dynamic_cast<TileAnti*>(pObject) != NULL) {
+                    collectedSanitizer = true;
+                    sanitized = true;
+                    sanitizerTile->setEnabled(false);
+                }
                 touchedTile = true;
                 m_dSY *= -tileBounce;
                 m_dY -= 5;
@@ -219,4 +229,16 @@ bool MyPlayer::getTouchedGround(){
         return true;
     }
     return touchedGround;
+}
+
+/*
+    If collectedSanitizer is true, sets it false, returns true.
+    Otherwise, returns false.
+*/
+bool MyPlayer::getCollectedSanitizer(){
+    if (collectedSanitizer) {
+        collectedSanitizer = false;
+        return true;
+    }
+    return collectedSanitizer;
 }

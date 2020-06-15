@@ -94,20 +94,7 @@ void Tile::DoUpdate( int iCurrentTime )
     }
 
     // Bottom, here we set random tile's x position.
-    if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (BASE_SCREEN_HEIGHT - 1) )
-    {
-        //m_dY = (initialY / 2);
-        m_dY = getNewYLocation();
-        
-        // Set tile to move horizontally at random times.
-        if (rand() % P_TILE_X_SPEED == 0) {
-            m_dSX = TILE_X_SPEED;
-        }
-
-        setTileYSpeed(TILE_Y_SPEED);
-        // Select x out of available x locations to avoid clashes.
-        m_dX = getNewXLocation();
-    }
+    HandleBottomBound();
 
     // Set current position - you NEED to set the current positions
     m_iCurrentScreenX = (int)(m_dX+0.5);
@@ -117,6 +104,25 @@ void Tile::DoUpdate( int iCurrentTime )
     RedrawObjects();
 }
 
+
+/*
+    Handles the case when tile reaches the bottom of the screen.
+    Sets tile's speed and new location.
+*/
+void Tile::HandleBottomBound() {
+    if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (BASE_SCREEN_HEIGHT - 1) )
+    {
+        // Set tile to move horizontally at random times.
+        if (rand() % P_TILE_X_SPEED == 0) {
+            m_dSX = TILE_X_SPEED;
+        }
+
+        setTileYSpeed(TILE_Y_SPEED);
+        // Select x and y out of available x and y locations to avoid clashes.
+        m_dY = getNewYLocation();
+        m_dX = getNewXLocation();
+    }
+}
 
 // Select x out of available x locations to avoid clashes.
 int Tile::getNewXLocation() {

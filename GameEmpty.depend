@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592205921 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592220439 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -401,6 +401,7 @@
 	"TileManager.h"
 	"DisplayableObject.h"
 	"Tile.h"
+	"TileAnti.h"
 	"EnemyTile.h"
 	"Virus.h"
 	"MyPlayer.h"
@@ -420,12 +421,12 @@
 	"BaseEngine.h"
 	"TileManager.h"
 
-1592207652 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+1592223070 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	<vector>
 
-1592207766 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1592222403 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
@@ -471,12 +472,13 @@
 	"Virus.h"
 	"Constants.h"
 
-1592152509 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+1592214991 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	"Constants.h"
+	"TileAnti.h"
 
-1592209216 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592220754 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
@@ -484,6 +486,7 @@
 	"Virus.h"
 	"Constants.h"
 	"ParallaxBg.h"
+	"TileAnti.h"
 
 1592211892 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 
@@ -497,11 +500,12 @@
 	"DisplayableObject.h"
 	"JPGImage.h"
 
-1592212096 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.cpp
+1592214733 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.cpp
 	"header.h"
 	"templates.h"
 	"TileAnti.h"
 
-1592212071 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.h
+1592222575 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.h
 	"Tile.h"
+	"Constants.h"
 

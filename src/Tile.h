@@ -15,6 +15,7 @@ class Tile : public DisplayableObject
         virtual ~Tile();
         void Draw(void);
         void DoUpdate(int currentTime);
+        virtual void HandleBottomBound();
         int getNewXLocation();
         int getNewYLocation();
 

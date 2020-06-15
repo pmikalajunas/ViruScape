@@ -53,7 +53,6 @@ Basically do the drawing of the background in here and it'll be copied to the sc
 */
 void MyProjectMain::SetupBackgroundBuffer()
 {
-	//FillBackground( 0xffffff );
 
 	// Draw the static background for initial and end states.
 	if(m_state == stateInit || m_state == endGame) {
@@ -153,7 +152,8 @@ void MyProjectMain::DrawStrings()
 			char buf[128];
 			sprintf( buf, "Playing as %s", reader->getPlayer().c_str());
 			DrawScreenString( 174, 93, buf, 0x0, mediumFont );
-			DrawScreenString( 169, 280, "Start game by pressing SPACE", 0x0, mediumFont );
+			DrawScreenString( 150, 430, "Press 'Space' to play the game", 0x0, mediumFont );
+			DrawScreenString( 150, 450, "Press 'Esc' to exit the game", 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			break;
 		case stateMain:
@@ -178,8 +178,8 @@ void MyProjectMain::DrawStrings()
 				DrawScreenString( 160, y, buf, 0x0, mediumFont );
 				y += 20;
 			}
-			DrawScreenString( 150, 460, "Press 'Space' to play again", 0x0, mediumFont );
-			DrawScreenString( 150, 480, "Press 'Esc' to exit the game", 0x0, mediumFont );
+			DrawScreenString( 150, 430, "Press 'Space' to play again", 0x0, mediumFont );
+			DrawScreenString( 150, 450, "Press 'Esc' to exit the game", 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
 			break;
 	}

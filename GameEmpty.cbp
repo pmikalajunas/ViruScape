@@ -14,6 +14,7 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="src" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -23,6 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -52,40 +54,13 @@
 		<Unit filename="bin/zlib1.dll" />
 		<Unit filename="src/BaseEngine.cpp" />
 		<Unit filename="src/BaseEngine.h" />
-		<Unit filename="src/BouncingBall.cpp" />
-		<Unit filename="src/BouncingBall.h" />
-		<Unit filename="src/BouncingBallMain.cpp" />
-		<Unit filename="src/BouncingBallMain.h" />
+		<Unit filename="src/Constants.h" />
 		<Unit filename="src/Cornerstone Regular.ttf" />
-		<Unit filename="src/Demo2Main.cpp" />
-		<Unit filename="src/Demo2Main.h" />
-		<Unit filename="src/Demo2Object.cpp" />
-		<Unit filename="src/Demo2Object.h" />
-		<Unit filename="src/Demo2TileManager.cpp" />
-		<Unit filename="src/Demo2TileManager.h" />
-		<Unit filename="src/Demo2aMain.cpp" />
-		<Unit filename="src/Demo2aMain.h" />
-		<Unit filename="src/Demo3Main.cpp" />
-		<Unit filename="src/Demo3Main.h" />
-		<Unit filename="src/Demo3Object.cpp" />
-		<Unit filename="src/Demo3Object.h" />
-		<Unit filename="src/Demo3ObjectFinished.cpp" />
-		<Unit filename="src/Demo3ObjectFinished.h" />
-		<Unit filename="src/Demo3TileManager.cpp" />
-		<Unit filename="src/Demo3TileManager.h" />
-		<Unit filename="src/Demo4Main.cpp" />
-		<Unit filename="src/Demo4Main.h" />
-		<Unit filename="src/Demo4Object.cpp" />
-		<Unit filename="src/Demo4Object.h" />
-		<Unit filename="src/Demo4TileManager.cpp" />
-		<Unit filename="src/Demo4TileManager.h" />
-		<Unit filename="src/DemoAMain.cpp" />
-		<Unit filename="src/DemoAMain.h" />
-		<Unit filename="src/DemoBObject.cpp" />
-		<Unit filename="src/DemoBObject.h" />
 		<Unit filename="src/DisplayableArc.h" />
 		<Unit filename="src/DisplayableObject.cpp" />
 		<Unit filename="src/DisplayableObject.h" />
+		<Unit filename="src/EnemyTile.cpp" />
+		<Unit filename="src/EnemyTile.h" />
 		<Unit filename="src/FileReader.cpp" />
 		<Unit filename="src/FileReader.h" />
 		<Unit filename="src/FontManager.cpp" />
@@ -93,14 +68,20 @@
 		<Unit filename="src/JPGImage.cpp" />
 		<Unit filename="src/JPGImage.h" />
 		<Unit filename="src/MovementPosition.h" />
-		<Unit filename="src/MyBall.cpp" />
-		<Unit filename="src/MyBall.h" />
+		<Unit filename="src/MyPlayer.cpp" />
+		<Unit filename="src/MyPlayer.h" />
 		<Unit filename="src/MyProjectMain.cpp" />
 		<Unit filename="src/MyProjectMain.h" />
+		<Unit filename="src/ParallaxBg.cpp" />
+		<Unit filename="src/ParallaxBg.h" />
 		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/Tile.h" />
+		<Unit filename="src/TileAnti.cpp" />
+		<Unit filename="src/TileAnti.h" />
 		<Unit filename="src/TileManager.cpp" />
 		<Unit filename="src/TileManager.h" />
+		<Unit filename="src/Virus.cpp" />
+		<Unit filename="src/Virus.h" />
 		<Unit filename="src/demo.jpg" />
 		<Unit filename="src/demo.png" />
 		<Unit filename="src/header.h" />
@@ -109,6 +90,7 @@
 		<Unit filename="src/neuropol x rg.ttf" />
 		<Unit filename="src/screenshot.PNG" />
 		<Unit filename="src/templates.h" />
+		<Unit filename="src/virus.png" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

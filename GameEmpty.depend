@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592220439 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592233955 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -478,7 +478,7 @@
 	"Constants.h"
 	"TileAnti.h"
 
-1592225243 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592225454 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"

@@ -8,8 +8,6 @@ ParallaxBg::ParallaxBg(BaseEngine* pEngine, int currentY) : DisplayableObject(pE
     bg = new ImageData();
     bg->LoadImage("bg_sky.png");
 
-    printf("%d\n", bg->GetWidth());
-
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = 0;
     m_iCurrentScreenY = currentY;
@@ -26,7 +24,6 @@ ParallaxBg::ParallaxBg(BaseEngine* pEngine, int currentY) : DisplayableObject(pE
 
 ParallaxBg::~ParallaxBg() 
 {
-    //dtor
 }
 
 
@@ -45,8 +42,8 @@ void ParallaxBg::Draw()
 
 void ParallaxBg::DoUpdate(int iCurrentTime)
 {
-    if(iCurrentTime % 20 == 0)
-	    m_iCurrentScreenY++;
+    if(iCurrentTime % BG_FRAMES_SKIPPED == 0)
+	    m_iCurrentScreenY += BG_MOVING_SPEED;
 
 	// Go to the top of the picture, when we reach the bottom.
 	if (m_iCurrentScreenY >= BASE_SCREEN_HEIGHT)

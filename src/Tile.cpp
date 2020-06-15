@@ -4,7 +4,6 @@
 #include "Constants.h"
 
 
-
 Tile::Tile(BaseEngine* pEngine, int tileX, int tileY)
 : DisplayableObject(pEngine)
 {
@@ -30,7 +29,7 @@ Tile::Tile(BaseEngine* pEngine, int tileX, int tileY)
     m_iDrawHeight = tileImage->GetHeight();
 
     // Speed
-    m_dSX = 0;
+    m_dSX = m_dSY = 0;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -69,7 +68,7 @@ void Tile::DoUpdate( int iCurrentTime )
 {
 
     // Slowly reduce the speed of moving tiles.
-    m_dSY -= 0.0001;
+    m_dSY -= TILE_SPEED_DECREASE;
     // Prevent tiles from going upwards.
     if(m_dSY < 0) {
         m_dSY = 0;
@@ -87,7 +86,7 @@ void Tile::DoUpdate( int iCurrentTime )
             m_dSX = -m_dSX;
     }
     // Right boundary.
-    if ((m_dX + m_iStartDrawPosX + m_iDrawWidth) > (GetEngine()->GetScreenWidth()-1) )
+    if ((m_dX + m_iStartDrawPosX + m_iDrawWidth) > (BASE_SCREEN_WIDTH - 1) )
     {
         m_dX = GetEngine()->GetScreenWidth() -1 - m_iStartDrawPosX - m_iDrawWidth;
         if ( m_dSX > 0 )
@@ -95,17 +94,17 @@ void Tile::DoUpdate( int iCurrentTime )
     }
 
     // Bottom, here we set random tile's x position.
-    if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (GetEngine()->GetScreenHeight()-1) )
+    if ( (m_dY+m_iStartDrawPosY+m_iDrawHeight) > (BASE_SCREEN_HEIGHT - 1) )
     {
         //m_dY = (initialY / 2);
         m_dY = getNewYLocation();
         
         // Set tile to move horizontally at random times.
-        if (rand() % 4 == 0) {
-            m_dSX = 0.2;
+        if (rand() % P_TILE_X_SPEED == 0) {
+            m_dSX = TILE_X_SPEED;
         }
 
-        setTileYSpeed(0.1);
+        setTileYSpeed(TILE_Y_SPEED);
         // Select x out of available x locations to avoid clashes.
         m_dX = getNewXLocation();
     }
@@ -150,11 +149,3 @@ int Tile::getNewYLocation() {
     return newY;
 }
 
-
-/*
-    Used to change tile's speed after player bounces off the tile.
-*/
-void Tile::setTileYSpeed(double ySpeed) {
-    m_dSY = ySpeed;
-    //printf("setTileYSpeeed, m_dSY: %.2f\n", m_dSY);
-}

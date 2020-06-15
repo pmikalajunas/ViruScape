@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592204161 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592205921 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -420,12 +420,12 @@
 	"BaseEngine.h"
 	"TileManager.h"
 
-1592191045 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
+1592207652 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	<vector>
 
-1592139451 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
+1592207766 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tile.cpp
 	"header.h"
 	"templates.h"
 	"Tile.h"
@@ -465,7 +465,7 @@
 	<string>
 	"Constants.h"
 
-1592154310 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
+1592206981 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\virus.cpp
 	"header.h"
 	"templates.h"
 	"Virus.h"
@@ -476,17 +476,18 @@
 	"JPGImage.h"
 	"Constants.h"
 
-1592152419 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592206562 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
 	"MyPlayer.h"
 	"Virus.h"
 	"Constants.h"
+	"ParallaxBg.h"
 
-1592154828 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592207999 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 
-1592195481 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\parallaxbg.cpp
+1592207942 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\parallaxbg.cpp
 	"header.h"
 	"templates.h"
 	"ParallaxBg.h"

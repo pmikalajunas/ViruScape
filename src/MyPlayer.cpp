@@ -15,28 +15,27 @@ m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
     frogImage->LoadImage("frog.png");
 
     // Current and previous coordinates for the object - set them the same initially
-    m_iCurrentScreenX = m_iPreviousScreenX = 380;
-    m_iCurrentScreenY = m_iPreviousScreenY = 300;
+    m_iCurrentScreenX = m_iPreviousScreenX = PLAYER_INITIAL_X;
+    m_iCurrentScreenY = m_iPreviousScreenY = PLAYER_INITIAL_Y;
 
     height = frogImage->GetHeight();
 
     // Draw position is object's left upper corner.
-    m_iStartDrawPosX = 0;
-    m_iStartDrawPosY = 0;
+    m_iStartDrawPosX = m_iStartDrawPosY = 0;
 
     // Record the ball size as both height and width.
     m_iDrawWidth = frogImage->GetWidth();
     m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
 
     // Initially player slowly goes down, gravity boosts the process.
-    m_dSY = 0.2;
+    m_dSY = PLAYER_DEFAULT_V_SPEED;
 
     // Gravity is added to the player's speed, to create falling effect.
-    gravity = 0.0019;
+    gravity = PLAYER_GRAVITY;
     // Bounce to the walls slows the player.
-    bounce = 0.95;
+    bounce = PLAYER_WALL_BOUNCE;
     // Bounce off the tile increases player's speed.
-    tileBounce = 1.1;
+    tileBounce = PLAYER_TILE_BOUNCE;
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -47,7 +46,6 @@ m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false)
 
 MyPlayer::~MyPlayer()
 {
-    //dtor
 }
 
 /*
@@ -126,7 +124,10 @@ void MyPlayer::UpdateInteractingObjects() {
 
         // If the virus hits us, we are done.
         if (distance < SPREADING_DISTANCE && dynamic_cast<Virus*>(pObject) != NULL) {
-            touchedGround = true;
+            Virus* virus = dynamic_cast<Virus*>(pObject);
+            // Make sure that the virus is visible.
+            if (virus->IsVisible()) 
+                touchedGround = true;
             return;
         }
 
@@ -153,17 +154,14 @@ void MyPlayer::DoUpdate(int currentTime)
     UpdateInteractingObjects();
 
     // Prevent player from going to fast either direction.
-    if(m_dSY > 1)
-        m_dSY = 1;
-    if(m_dSX > 0.6)
-        m_dSX = 0.6;
-
+    if(m_dSY > PLAYER_V_SPEED_CAP)
+        m_dSY = PLAYER_V_SPEED_CAP;
 
     // Player can be navigated left and right with arrow keys.
 	if ( GetEngine()->IsKeyPressed( SDLK_LEFT ) )
-        m_dX -= 0.4;
+        m_dX -= PLAYER_SIDE_MOVEMENT_SPEED;
 	if ( GetEngine()->IsKeyPressed( SDLK_RIGHT ) )
-        m_dX += 0.4;
+        m_dX += PLAYER_SIDE_MOVEMENT_SPEED;
 
     // Change location based on the current speed.
 	m_dX += m_dSX;

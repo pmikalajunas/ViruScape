@@ -15,15 +15,18 @@ class Tile : public DisplayableObject
         virtual ~Tile();
         void Draw(void);
         void DoUpdate(int currentTime);
-        void setTileYSpeed(double ySpeed);
         int getNewXLocation();
         int getNewYLocation();
+
+        // Getters/Setters
+        void setTileYSpeed(double ySpeed) { m_dSY = ySpeed; }
+
 
         // Available x locations for a tile, avoids tile clashes.
         static vector<int> xTileLocations;
         // Save initial set of locations.
         static vector<int> xTileLocationsInitial;
-                // Available x locations for a tile, avoids tile clashes.
+        // Available x locations for a tile, avoids tile clashes.
         static vector<int> yTileLocations;
         // Save initial set of locations.
         static vector<int> yTileLocationsInitial;

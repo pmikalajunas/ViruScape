@@ -232,7 +232,7 @@ void MyProjectMain::UpdateAllObjects(int iCurrentTime) {
 			// If player touched a tile, get the tiles moving.
 			if (dynamic_cast<Tile*>(m_ppDisplayableObjects[i]) != NULL && myPlayer->getTileCollision()) {
 				Tile* tile = dynamic_cast<Tile*>(m_ppDisplayableObjects[i]);
-				tile->setTileYSpeed(0.2);
+				tile->setTileYSpeed(TILE_SPEED_AFTER_BOUNCE);
 				score += 1;
 			}
 

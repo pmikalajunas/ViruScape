@@ -15,16 +15,15 @@ player(player)
     m_iCurrentScreenY = m_iPreviousScreenY = 0;
 
     // The object coordinate will be the top left of the object
-    m_iStartDrawPosX = 0;
-    m_iStartDrawPosY = 0;
+    m_iStartDrawPosX = m_iStartDrawPosY = 0;
 
     // // Record the ball size as both height and width
     m_iDrawWidth = virusImage->GetWidth();
     m_iDrawHeight = virusImage->GetHeight();
 
     // Speed
-    m_dSX = 0;
-    m_dSY = 0;
+    m_dSX = m_dSY = 0;
+
     // Place the object initially.
     m_dX = m_iCurrentScreenX;
     m_dY = m_iCurrentScreenY;
@@ -35,7 +34,6 @@ player(player)
 
 Virus::~Virus()
 {
-    //dtor
 }
 
 /*
@@ -119,40 +117,34 @@ void Virus::DoUpdate( int iCurrentTime ) {
         return;
     }
 
-    // Reduce the time between updating the position of the virus.
-    if (iCurrentTime % 15 != 0) {
-        RedrawObjects();
-        return;
-    }
-
     switch(playerPositionToVirus) {
         case NW:
-            m_iCurrentScreenY += 1;
-		    m_iCurrentScreenX += 1;
+            m_iCurrentScreenY += VIRUS_SPEED;
+		    m_iCurrentScreenX += VIRUS_SPEED;
             break;
         case SE:
-            m_iCurrentScreenY -= 1;
-		    m_iCurrentScreenX -= 1;
+            m_iCurrentScreenY -= VIRUS_SPEED;
+		    m_iCurrentScreenX -= VIRUS_SPEED;
             break;
         case SW:
-            m_iCurrentScreenY -= 1;
-		    m_iCurrentScreenX += 1;
+            m_iCurrentScreenY -= VIRUS_SPEED;
+		    m_iCurrentScreenX += VIRUS_SPEED;
             break;
         case NE:
-            m_iCurrentScreenY += 1;
-		    m_iCurrentScreenX -= 1;
+            m_iCurrentScreenY += VIRUS_SPEED;
+		    m_iCurrentScreenX -= VIRUS_SPEED;
             break;
         case N:
-            m_iCurrentScreenY += 1;
+            m_iCurrentScreenY += VIRUS_SPEED;
             break;
         case S:
-            m_iCurrentScreenY -= 1;
+            m_iCurrentScreenY -= VIRUS_SPEED;
             break;
         case W:
-            m_iCurrentScreenX += 1;
+            m_iCurrentScreenX += VIRUS_SPEED;
             break;
         case E:
-            m_iCurrentScreenX -= 1;
+            m_iCurrentScreenX -= VIRUS_SPEED;
             break;
         default:
             break;

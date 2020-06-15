@@ -1,13 +1,8 @@
 #include "header.h"
-
-// This is a basic implementation, without fancy stuff
-
 #include "BaseEngine.h"
-
 #include "MyProjectMain.h"
 
 #include "JPGImage.h"
-
 #include "TileManager.h"
 
 #include "DisplayableObject.h"
@@ -34,9 +29,11 @@ vector<int> Tile::yTileLocationsInitial(yTileLocations.begin(), yTileLocations.e
 
 
 MyProjectMain::MyProjectMain(void) : BaseEngine( 50 ), 
-m_state(stateInit), score(0)
+m_state(stateInit), score(0), rectanglePosition(FROG_SELECTED)
 {
 
+	// Put frame on frog initially.
+	rectangle = new SelectionRectangle(this, FROG_FRAME_X, FROG_FRAME_Y);
 	reader = new FileReader();
 	intialiseFonts();
 
@@ -96,6 +93,11 @@ void MyProjectMain::SetupBackgroundBuffer()
 			0, 0, 540, 30,
 			init_virus->GetWidth(), init_virus->GetHeight()
 		);
+
+		rectangle->Draw();
+		Redraw(false);
+		rectangle->RedrawBackground();
+		
 	}
  
 	// Draw trophy next to leaderboard title.
@@ -127,7 +129,7 @@ int MyProjectMain::InitialiseObjects()
 	DestroyOldObjects();
 
 	// Create an array one element larger than the number of objects that you want.
-	m_ppDisplayableObjects = new DisplayableObject*[10];
+	m_ppDisplayableObjects = new DisplayableObject*[11];
 
 	// List of available x locations for tiles.
 	vector<int> xLocations = Tile::xTileLocationsInitial;
@@ -135,8 +137,7 @@ int MyProjectMain::InitialiseObjects()
 	TileAnti* sanitizerTile = new TileAnti(this, xLocations[5], 250);
 	MyPlayer* player = new MyPlayer(this, sanitizerTile);
 	Virus* virus =  new Virus(this, player);
-	EnemyTile* enemyTile = new EnemyTile(this, xLocations[0], 300, virus);
-	
+	EnemyTile* enemyTile = new EnemyTile(this, xLocations[0], 300, virus);	
 
 	// You MUST set the array entry after the last one that you create to NULL, so that ,the system knows when to stop.
 	// i.e. The LAST entry has to be NULL. The fact that it is NULL is used in order to work out where the end of the array is.
@@ -176,6 +177,7 @@ void MyProjectMain::DrawStrings()
 			char buf[128];
 			sprintf( buf, "Playing as %s", reader->getPlayer().c_str());
 			DrawScreenString( 174, 93, buf, 0x0, mediumFont );
+			DrawScreenString( 150, 410, "Arrow Keys to select character", 0x0, mediumFont );
 			DrawScreenString( 150, 430, "Press 'Space' to play the game", 0x0, mediumFont );
 			DrawScreenString( 150, 450, "Press 'Esc' to exit the game", 0x0, mediumFont );
 			SetNextUpdateRect( 0/*X*/, 280/*Y*/, GetScreenWidth(), 40/*Height*/ );
@@ -323,6 +325,42 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				Redraw(true);
 				break;
 			} // End switch on current state
+			break;
+		case SDLK_LEFT:
+			if(m_state == stateInit) {
+				if(rectanglePosition == FROG_SELECTED) {
+					rectanglePosition = V_GUY_SELECTED;
+					rectangle->setPosition(V_GUY_FRAME_X, V_GUY_FRAME_Y);
+					rectangle->RedrawBackground();
+					rectangle->Draw();
+					Redraw(false);
+				} 
+				else if(rectanglePosition == PINK_M_SELECTED) {
+					rectanglePosition = FROG_SELECTED;
+					rectangle->setPosition(FROG_FRAME_X, FROG_FRAME_Y);
+					rectangle->RedrawBackground();
+					rectangle->Draw();
+					Redraw(false);
+				}
+			}
+			break;
+		case SDLK_RIGHT:
+			if(m_state == stateInit) {
+				if(rectanglePosition == V_GUY_SELECTED) {
+					rectanglePosition = FROG_SELECTED;
+					rectangle->setPosition(FROG_FRAME_X, FROG_FRAME_Y);
+					rectangle->RedrawBackground();
+					rectangle->Draw();
+					Redraw(false);
+				} 
+				else if(rectanglePosition == FROG_SELECTED) {
+					rectanglePosition = PINK_M_SELECTED;
+					rectangle->setPosition(P_M_FRAME_X, P_M_FRAME_Y);
+					rectangle->RedrawBackground();
+					rectangle->Draw();
+					Redraw(false);
+				}
+			}
 			break;
 	}
 }

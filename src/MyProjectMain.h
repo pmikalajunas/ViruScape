@@ -5,6 +5,8 @@
 #include "FileReader.h"
 #include <unordered_map>
 #include "JPGImage.h"
+#include "SelectionRectangle.h"
+
 
 using namespace std;
 
@@ -64,6 +66,9 @@ private:
 	Font* mediumFont;
 	Font* largeFont;
 
+	SelectionRectangle* rectangle;
+	// Defines which character is selected.
+	int rectanglePosition;
 
 };
 

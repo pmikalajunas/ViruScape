@@ -6,8 +6,19 @@
 // Number of tiles displayed on the screen (including EnemyTile)
 #define NUMBER_OF_TILES 5
 // We add the offset to the object.
-#define IMAGE_HEIGHT_OFFSET 10;
+#define IMAGE_HEIGHT_OFFSET 10
 
+// Which character is selected in the main screen
+#define FROG_SELECTED 0
+#define PINK_M_SELECTED 1
+#define V_GUY_SELECTED 2
+
+#define V_GUY_FRAME_X 180
+#define V_GUY_FRAME_Y 210
+#define FROG_FRAME_X 330
+#define FROG_FRAME_Y 210
+#define P_M_FRAME_X 480
+#define P_M_FRAME_Y 210
 
 
 // -------------------- MOVING BACKGROUND ---------------------------

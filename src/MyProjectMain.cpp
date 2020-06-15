@@ -12,6 +12,7 @@
 
 #include "DisplayableObject.h"
 #include "Tile.h"
+#include "TileAnti.h"
 #include "EnemyTile.h"
 #include "Virus.h"
 #include "MyPlayer.h"
@@ -24,7 +25,7 @@ using namespace std;
 
 
 // Initialize tile x locations
-vector<int> Tile::xTileLocations = {100, 200, 300, 400, 500};
+vector<int> Tile::xTileLocations = {100, 200, 300, 400, 500, 520};
 vector<int> Tile::xTileLocationsInitial(xTileLocations.begin(), xTileLocations.end()); 
 
 // Initialize tile y locations
@@ -103,7 +104,7 @@ int MyProjectMain::InitialiseObjects()
 	DestroyOldObjects();
 
 	// Create an array one element larger than the number of objects that you want.
-	m_ppDisplayableObjects = new DisplayableObject*[9];
+	m_ppDisplayableObjects = new DisplayableObject*[10];
 
 	// List of available x locations for tiles.
 	vector<int> xLocations = Tile::xTileLocationsInitial;
@@ -124,7 +125,8 @@ int MyProjectMain::InitialiseObjects()
 	m_ppDisplayableObjects[7] = new ParallaxBg(this, 0);
 	// Another background will take over the first, creating infinite sky illusion.
 	m_ppDisplayableObjects[8] = new ParallaxBg(this, - BASE_SCREEN_HEIGHT);
-	m_ppDisplayableObjects[9] = NULL;
+	m_ppDisplayableObjects[9] = new TileAnti(this, xLocations[5], 250);
+	m_ppDisplayableObjects[10] = NULL;
 
 	return 0;
 }

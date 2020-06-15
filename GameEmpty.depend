@@ -449,7 +449,7 @@
 	<unordered_map>
 	"Constants.h"
 
-1592154647 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
+1592211893 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\enemytile.cpp
 	"header.h"
 	"templates.h"
 	"EnemyTile.h"
@@ -476,7 +476,7 @@
 	"JPGImage.h"
 	"Constants.h"
 
-1592206562 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592209216 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
@@ -485,7 +485,7 @@
 	"Constants.h"
 	"ParallaxBg.h"
 
-1592207999 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
+1592211892 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\constants.h
 
 1592207942 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\parallaxbg.cpp
 	"header.h"
@@ -496,4 +496,12 @@
 1592191708 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\parallaxbg.h
 	"DisplayableObject.h"
 	"JPGImage.h"
+
+1592212096 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.cpp
+	"header.h"
+	"templates.h"
+	"TileAnti.h"
+
+1592212071 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tileanti.h
+	"Tile.h"
 

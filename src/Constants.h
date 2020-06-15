@@ -74,3 +74,14 @@
 // Probability that tiles gets horizontal speed
 // We set speed if (rand() % P_TILE_X_SPEED == 0)
 #define P_TILE_X_SPEED 4
+
+
+// -------------------- ENEMY TILE ---------------------------
+// How fast tiles moves after being released.
+#define ENEMY_TILE_Y_SPEED 1
+
+// How fast is loses its speed.
+#define ENEMY_TILE_SPEED_DECREASE 0.001
+
+// When virus is released (y coordinate).
+#define VIRUS_RELEASE_Y 100

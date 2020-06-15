@@ -48,7 +48,7 @@ void EnemyTile::DoUpdate( int iCurrentTime )
 {
 
     // Slowly reduce the speed of moving tiles.
-    m_dSY -= 0.0001;
+    m_dSY -= ENEMY_TILE_SPEED_DECREASE;
     // Prevent tiles from going upwards.
     if(m_dSY < 0) {
         m_dSY = 0;
@@ -60,7 +60,7 @@ void EnemyTile::DoUpdate( int iCurrentTime )
 
     // Release the virus if it haven's been released ...
     // and tile reached 100 pixels
-    if (m_dY > 100 && !virusReleased) {
+    if (m_dY > VIRUS_RELEASE_Y && !virusReleased) {
 
         // Find x and y of the player.
         int playerX = m_dX + (m_iDrawWidth / 2);
@@ -92,7 +92,7 @@ void EnemyTile::DoUpdate( int iCurrentTime )
         m_dY = getNewYLocation();
 
         // Get it slowly moving.
-        setTileYSpeed(0.1);
+        setTileYSpeed(ENEMY_TILE_Y_SPEED);
         // Select x out of available x locations to avoid clashes.
         m_dX = getNewXLocation();
         // Reset the virus release flag.

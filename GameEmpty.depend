@@ -249,7 +249,7 @@
 	"JPGImage.h"
 	"TileManager.h"
 
-1300892640 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\jpgimage.h
+1592273765 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\jpgimage.h
 
 1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\demo2amain.cpp
 	"header.h"
@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592239634 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592274197 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -473,13 +473,13 @@
 	"Virus.h"
 	"Constants.h"
 
-1592225210 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
+1592240849 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 	"Constants.h"
 	"TileAnti.h"
 
-1592225454 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592241142 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"
@@ -510,11 +510,11 @@
 	"Tile.h"
 	"Constants.h"
 
-1592237086 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\selectionrectangle.h
+1592273956 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\selectionrectangle.h
 	"DisplayableObject.h"
 	"JPGImage.h"
 
-1592239717 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\selectionrectangle.cpp
+1592273986 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\selectionrectangle.cpp
 	"header.h"
 	"templates.h"
 	"Constants.h"

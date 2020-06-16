@@ -95,8 +95,8 @@ void MyProjectMain::SetupBackgroundBuffer()
 		);
 
 		rectangle->Draw();
-		Redraw(false);
-		rectangle->RedrawBackground();
+		// Redraw(false);
+		// rectangle->RedrawBackground();
 		
 	}
  
@@ -122,6 +122,7 @@ Sub-classes need to implement this function.
 */
 int MyProjectMain::InitialiseObjects()
 {
+
 	// Record the fact that we are about to change the array - so it doesn't get used elsewhere without reloading it
 	DrawableObjectsChanged();
 
@@ -135,7 +136,7 @@ int MyProjectMain::InitialiseObjects()
 	vector<int> xLocations = Tile::xTileLocationsInitial;
 
 	TileAnti* sanitizerTile = new TileAnti(this, xLocations[5], 250);
-	MyPlayer* player = new MyPlayer(this, sanitizerTile);
+	MyPlayer* player = new MyPlayer(this, sanitizerTile, rectanglePosition);
 	Virus* virus =  new Virus(this, player);
 	EnemyTile* enemyTile = new EnemyTile(this, xLocations[0], 300, virus);	
 
@@ -331,16 +332,18 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				if(rectanglePosition == FROG_SELECTED) {
 					rectanglePosition = V_GUY_SELECTED;
 					rectangle->setPosition(V_GUY_FRAME_X, V_GUY_FRAME_Y);
-					rectangle->RedrawBackground();
-					rectangle->Draw();
-					Redraw(false);
+					SetupBackgroundBuffer();
+					// rectangle->RedrawBackground();
+					// rectangle->Draw();
+					Redraw(true);
 				} 
 				else if(rectanglePosition == PINK_M_SELECTED) {
 					rectanglePosition = FROG_SELECTED;
 					rectangle->setPosition(FROG_FRAME_X, FROG_FRAME_Y);
-					rectangle->RedrawBackground();
-					rectangle->Draw();
-					Redraw(false);
+					SetupBackgroundBuffer();
+					// rectangle->RedrawBackground();
+					// rectangle->Draw();
+					Redraw(true);
 				}
 			}
 			break;
@@ -349,16 +352,18 @@ void MyProjectMain::KeyDown(int iKeyCode)
 				if(rectanglePosition == V_GUY_SELECTED) {
 					rectanglePosition = FROG_SELECTED;
 					rectangle->setPosition(FROG_FRAME_X, FROG_FRAME_Y);
-					rectangle->RedrawBackground();
-					rectangle->Draw();
-					Redraw(false);
+					SetupBackgroundBuffer();
+					// rectangle->RedrawBackground();
+					// rectangle->Draw();
+					Redraw(true);
 				} 
 				else if(rectanglePosition == FROG_SELECTED) {
 					rectanglePosition = PINK_M_SELECTED;
 					rectangle->setPosition(P_M_FRAME_X, P_M_FRAME_Y);
-					rectangle->RedrawBackground();
-					rectangle->Draw();
-					Redraw(false);
+					SetupBackgroundBuffer();
+					// rectangle->RedrawBackground();
+					// rectangle->Draw();
+					Redraw(true);
 				}
 			}
 			break;

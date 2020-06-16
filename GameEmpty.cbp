@@ -74,6 +74,8 @@
 		<Unit filename="src/MyProjectMain.h" />
 		<Unit filename="src/ParallaxBg.cpp" />
 		<Unit filename="src/ParallaxBg.h" />
+		<Unit filename="src/SelectionRectangle.cpp" />
+		<Unit filename="src/SelectionRectangle.h" />
 		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/Tile.h" />
 		<Unit filename="src/TileAnti.cpp" />

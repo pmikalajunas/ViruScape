@@ -31,7 +31,7 @@ SelectionRectangle::~SelectionRectangle()
 }
 
 void SelectionRectangle::Draw() {
-    rectangleImage->RenderImage(GetEngine()->GetForeground(),
+    rectangleImage->RenderImage(GetEngine()->GetBackground(),
     0, 0,
     m_iCurrentScreenX, m_iCurrentScreenY,
     rectangleImage->GetWidth(), rectangleImage->GetHeight());
@@ -41,6 +41,8 @@ void SelectionRectangle::Draw() {
     // This will then remove the object from the screen.
     StoreLastScreenPositionAndUpdateRect();
 }
+
+
 
 
 void SelectionRectangle::setPosition(int x, int y) {

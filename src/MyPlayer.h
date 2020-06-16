@@ -10,13 +10,14 @@
 class MyPlayer : public DisplayableObject
 {
     public:
-        MyPlayer(BaseEngine* pEngine, TileAnti* tile);
+        MyPlayer(BaseEngine* pEngine, TileAnti* tile, int charId);
         virtual ~MyPlayer();
         
         void Draw(void);
         void DoUpdate(int currentTime);
         double calculatePlayersDistanceToObject(DisplayableObject* pObject);
         void UpdateInteractingObjects();
+        void LoadPlayerSprites(int characterID);
 
         // GETTERS/SETTERS
         double GetYSpeed() { return m_dSY; }
@@ -44,8 +45,8 @@ class MyPlayer : public DisplayableObject
         bool collectedSanitizer;
         bool sanitized;
         int sanitizedTime;
-        ImageSurface* frogImage;
-        ImageSurface* frogShielded;
+        ImageSurface* playerImage;
+        ImageSurface* playerShielded;
         TileAnti* sanitizerTile;
 
 };

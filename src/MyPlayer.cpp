@@ -7,30 +7,24 @@
 #include "ParallaxBg.h"
 #include "TileAnti.h"
 
-MyPlayer::MyPlayer(BaseEngine* pEngine, TileAnti* tile) : DisplayableObject(pEngine),
+MyPlayer::MyPlayer(BaseEngine* pEngine, TileAnti* tile, int charId) : DisplayableObject(pEngine),
 m_pMainEngine( pEngine ), touchedTile(false), touchedGround(false),
 collectedSanitizer(false), sanitized(false), sanitizerTile(tile), sanitizedTime(0)
 {
 
-    // Load frog image.
-    frogImage = new ImageSurface();
-    frogImage->LoadImage("frog.png");
-
-    // Load shielded frog image.
-    frogShielded = new ImageSurface();
-    frogShielded->LoadImage("frog_shielded.png");
+    LoadPlayerSprites(charId);
 
     // Current and previous coordinates for the object - set them the same initially
     m_iCurrentScreenX = m_iPreviousScreenX = PLAYER_INITIAL_X;
     m_iCurrentScreenY = m_iPreviousScreenY = PLAYER_INITIAL_Y;
 
-    height = frogImage->GetHeight();
+    height = playerImage->GetHeight();
 
     // Draw position is object's left upper corner.
     m_iStartDrawPosX = m_iStartDrawPosY = 0;
 
-    m_iDrawWidth = frogImage->GetWidth();
-    m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
+    m_iDrawWidth = playerImage->GetWidth();
+    m_iDrawHeight = playerImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
 
     // Initially player slowly goes down, gravity boosts the process.
     m_dSY = PLAYER_DEFAULT_V_SPEED;
@@ -53,6 +47,33 @@ MyPlayer::~MyPlayer()
 {
 }
 
+void MyPlayer::LoadPlayerSprites(int characterID) {
+
+    switch(characterID) {
+        case FROG_SELECTED:
+            playerImage = new ImageSurface();
+            playerImage->LoadImage("frog.png");
+            playerShielded = new ImageSurface();
+            playerShielded->LoadImage("frog_shielded.png");
+            break;
+        case PINK_M_SELECTED:
+            playerImage = new ImageSurface();
+            playerImage->LoadImage("pink_man.png");
+            playerShielded = new ImageSurface();
+            playerShielded->LoadImage("frog_shielded.png");
+            break;
+        case V_GUY_SELECTED:
+            playerImage = new ImageSurface();
+            playerImage->LoadImage("virtual_guy.png");
+            playerShielded = new ImageSurface();
+            playerShielded->LoadImage("frog_shielded.png");
+            break;
+    }
+
+
+}
+
+
 /*
     Draws player on the screen.
 */
@@ -61,19 +82,19 @@ void MyPlayer::Draw(void)
 
     // Draw a shield over a frog if its sanitized.
     if(!sanitized) {
-        m_iDrawWidth = frogImage->GetWidth();
-        m_iDrawHeight = frogImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
-        frogImage->RenderImage(GetEngine()->GetForeground(),
+        m_iDrawWidth = playerImage->GetWidth();
+        m_iDrawHeight = playerImage->GetHeight() + IMAGE_HEIGHT_OFFSET;
+        playerImage->RenderImage(GetEngine()->GetForeground(),
             0, 0,
             m_iCurrentScreenX, m_iCurrentScreenY,
-            frogImage->GetWidth(), frogImage->GetHeight());
+            playerImage->GetWidth(), playerImage->GetHeight());
     } else {
-        m_iDrawWidth = frogShielded->GetWidth();
-        m_iDrawHeight = frogShielded->GetHeight() + IMAGE_HEIGHT_OFFSET;
-        frogShielded->RenderImage(GetEngine()->GetForeground(),
+        m_iDrawWidth = playerShielded->GetWidth();
+        m_iDrawHeight = playerShielded->GetHeight() + IMAGE_HEIGHT_OFFSET;
+        playerShielded->RenderImage(GetEngine()->GetForeground(),
             0, 0,
             m_iCurrentScreenX, m_iCurrentScreenY,
-            frogShielded->GetWidth(), frogShielded->GetHeight());
+            playerShielded->GetWidth(), playerShielded->GetHeight());
     }
 
 

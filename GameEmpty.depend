@@ -393,7 +393,7 @@
 	"templates.h"
 	"MyProjectMain.h"
 
-1592274197 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
+1592274651 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.cpp
 	"header.h"
 	"BaseEngine.h"
 	"MyProjectMain.h"
@@ -410,12 +410,13 @@
 	<vector>
 	"ParallaxBg.h"
 
-1592236693 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
+1592274510 c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myprojectmain.h
 	"BaseEngine.h"
 	"FileReader.h"
 	<unordered_map>
 	"JPGImage.h"
 	"SelectionRectangle.h"
+	"MyPlayer.h"
 
 1300202852 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\tilemanager.cpp
 	"header.h"
@@ -479,7 +480,7 @@
 	"Constants.h"
 	"TileAnti.h"
 
-1592241142 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
+1592274956 source:c:\users\paulius\documents\c++exam\gameempty\gameempty\src\myplayer.cpp
 	<cmath>
 	"header.h"
 	"templates.h"

@@ -136,7 +136,7 @@ int MyProjectMain::InitialiseObjects()
 	vector<int> xLocations = Tile::xTileLocationsInitial;
 
 	TileAnti* sanitizerTile = new TileAnti(this, xLocations[5], 250);
-	MyPlayer* player = new MyPlayer(this, sanitizerTile, rectanglePosition);
+	player = new MyPlayer(this, sanitizerTile, rectanglePosition);
 	Virus* virus =  new Virus(this, player);
 	EnemyTile* enemyTile = new EnemyTile(this, xLocations[0], 300, virus);	
 
@@ -296,6 +296,8 @@ void MyProjectMain::KeyDown(int iKeyCode)
 			case stateInit:
 				// Go to state main
 				m_state = stateMain;
+				// Load the selected character.
+				player->LoadPlayerSprites(rectanglePosition);
 				// Force redraw of background
 				SetupBackgroundBuffer();
 				// Redraw the whole screen now
@@ -333,16 +335,12 @@ void MyProjectMain::KeyDown(int iKeyCode)
 					rectanglePosition = V_GUY_SELECTED;
 					rectangle->setPosition(V_GUY_FRAME_X, V_GUY_FRAME_Y);
 					SetupBackgroundBuffer();
-					// rectangle->RedrawBackground();
-					// rectangle->Draw();
 					Redraw(true);
 				} 
 				else if(rectanglePosition == PINK_M_SELECTED) {
 					rectanglePosition = FROG_SELECTED;
 					rectangle->setPosition(FROG_FRAME_X, FROG_FRAME_Y);
 					SetupBackgroundBuffer();
-					// rectangle->RedrawBackground();
-					// rectangle->Draw();
 					Redraw(true);
 				}
 			}
@@ -353,16 +351,12 @@ void MyProjectMain::KeyDown(int iKeyCode)
 					rectanglePosition = FROG_SELECTED;
 					rectangle->setPosition(FROG_FRAME_X, FROG_FRAME_Y);
 					SetupBackgroundBuffer();
-					// rectangle->RedrawBackground();
-					// rectangle->Draw();
 					Redraw(true);
 				} 
 				else if(rectanglePosition == FROG_SELECTED) {
 					rectanglePosition = PINK_M_SELECTED;
 					rectangle->setPosition(P_M_FRAME_X, P_M_FRAME_Y);
 					SetupBackgroundBuffer();
-					// rectangle->RedrawBackground();
-					// rectangle->Draw();
 					Redraw(true);
 				}
 			}

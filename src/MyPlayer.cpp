@@ -60,13 +60,13 @@ void MyPlayer::LoadPlayerSprites(int characterID) {
             playerImage = new ImageSurface();
             playerImage->LoadImage("pink_man.png");
             playerShielded = new ImageSurface();
-            playerShielded->LoadImage("frog_shielded.png");
+            playerShielded->LoadImage("pink_man_shielded.png");
             break;
         case V_GUY_SELECTED:
             playerImage = new ImageSurface();
             playerImage->LoadImage("virtual_guy.png");
             playerShielded = new ImageSurface();
-            playerShielded->LoadImage("frog_shielded.png");
+            playerShielded->LoadImage("virtual_guy_shielded.png");
             break;
     }
 
